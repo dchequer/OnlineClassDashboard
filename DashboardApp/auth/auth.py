@@ -1,17 +1,16 @@
 # DashboardApp/auth/auth.py
 from flask import Blueprint, render_template, request, current_app
-from .models.user import User
+#from DashboardApp import db
 
-db = current_app.extensions['sqlalchemy'].db
-
-auth_bp = Blueprint('auth', __name__)
+auth_bp = Blueprint('auth', __name__, static_folder='static', template_folder='templates')
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        # Logic for checking user credentials and logging in
+        # Logic for handling login
+        print("POST request received")
         pass
-    return render_template('login.html')
+    return render_template("login.html")
 
 @auth_bp.route('/signup', methods=['GET', 'POST'])
 def signup():
