@@ -9,7 +9,17 @@ def login():
     if request.method == 'POST':
         # Logic for handling login
         print("POST request received")
-        pass
+        
+        # Get the username and password from the form
+        username = request.form['username']
+        password = request.form['password']
+
+        # Check if the username and password are correct
+        
+
+
+
+
     return render_template("login.html")
 
 @auth_bp.route('/signup', methods=['GET', 'POST'])
