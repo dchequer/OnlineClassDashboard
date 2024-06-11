@@ -10,7 +10,7 @@ body {
 #background {
   /* layout */
   width: 100%;
-  height: 100vh;
+  height: 100%;
   flex-shrink: 0;
   position: relative;
 
@@ -19,18 +19,24 @@ body {
   background-size: cover;
 }
 
-#login-box {
+#login-box,
+#signup-box {
   /* layout */
-  width: 50%;
-  height: 70%;
+  width: 50em;
+  height: 40em;
   flex-shrink: 0;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  padding: 1em;
+  min-width: 100px;
+  max-width: 800px;
+  min-height: 200px;
+  max-height: 900px;
 
   /* style */
-  border-radius: 60px;
+  border-radius: 4vw;
   opacity: 0.99;
   background: #1e1e1e;
 
@@ -41,30 +47,56 @@ body {
   justify-content: center; /* This centers children vertically in the container */
 }
 
-#login-title {
+#login-title,
+#signup-title {
   /* layout */
   display: flex;
   flex-direction: column;
   justify-content: center;
   flex-shrink: 0;
+  margin-bottom: 25px;
 
   /* typography */
   color: #fff;
   text-align: center;
-  font-size: 48px;
+  font-size: calc(3em + 1vw);
   font-style: normal;
   font-weight: 400;
   line-height: normal;
 }
 
-#login-form {
+#error-box {
+  /* layout */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #b917177F;
+  border-radius: 1em;
+  margin-bottom: 10px;
+  width: 110%;
+}
+
+#error-message {
+  /* typography */
+  color: #fff;
+  font-size: 1em;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0.5em;
+
+}
+
+#login-form,
+#signup-form {
   /* layout */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  max-width: fit-content;
+  width: 40%;
+  height: 40%;
 }
 
 .field-container {
@@ -72,10 +104,12 @@ body {
   flex-direction: column;
   justify-content: center;
   width: 100%;
+  font-size: 1em;
 }
 
 #username-field,
-#password-field {
+#password-field,
+#confirm-password-field {
   border: none;
   outline: none;
   border-radius: 15px;
@@ -83,10 +117,12 @@ body {
   background-color: #ccc;
   box-shadow: inset 2px 5px 10px rgba(0, 0, 0, 0.3);
   transition: 300ms ease-in-out;
+  height: 1.5em;
 }
 
 #username-field:focus,
-#password-field:focus {
+#password-field:focus,
+#confirm-password-field:focus {
   background-color: white;
   transform: scale(1.05);
   box-shadow: 5px 5px 10px #969696, -5px -5px 10px #8f8f8f;
@@ -94,21 +130,25 @@ body {
 
 .subtitle {
   margin: 0;
-  margin-bottom: 1em;
+  margin-bottom: .5em;
   color: #1e1e1e;
-  transition: color 0.5s ease-in-out;
+  transition: color 300ms ease-in-out;
 }
 
-/* Show subtitle when the input field is not empty */
-#username-field:not(:placeholder-shown) + #username-subtitle {
+/* #region Placeholder Animation */
+#username-field:not(:placeholder-shown),
+#password-field:not(:placeholder-shown),
+#confirm-password-field:not(:placeholder-shown) {
+  margin-bottom: 0;
+}
+#username-field:not(:placeholder-shown) + #username-subtitle,
+#password-field:not(:placeholder-shown) + #password-subtitle,
+#confirm-password-field:not(:placeholder-shown) + #confirm-password-subtitle {
   color: #fff;
 }
+/* #endregion */
 
-/* Show subtitle when the input field is not empty */
-#password-field:not(:placeholder-shown) + #password-subtitle {
-  color: #fff;
-}
-
+/* #region Buttons Style*/
 #buttons {
   display: flex; /* or 'display: grid;' */
   justify-content: space-around; /* For Flexbox */
@@ -119,8 +159,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  width: 45px;
-  height: 45px;
+  width: 3em;
+  height: 3em;
   border: none;
   border-radius: 50%;
   cursor: pointer;
@@ -129,6 +169,7 @@ body {
   transition-duration: 0.3s;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
   background-color: #ca0303;
+  font-size: calc(0.5em + 0.5vw);
 }
 
 /* plus sign */
@@ -149,13 +190,14 @@ body {
 }
 /* text */
 .text {
+  font-family: MuseoModerno;
   position: absolute;
   right: 0%;
   width: 0%;
   opacity: 0;
   color: white;
-  font-size: 1.2em;
-  font-weight: 600;
+  font-size: 1em;
+  font-weight: 400;
   transition-duration: 0.3s;
 }
 /* hover effect on button width */
@@ -181,3 +223,96 @@ body {
 .Btn:active {
   transform: translate(2px, 2px);
 }
+/* #endregion */
+
+/* #region Arrow Style */
+#go-back {
+  display: inline-flex;
+  align-items: center;
+}
+#back-link {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2em;
+  font-weight: 600;
+  margin-left: 10px;
+}
+.arrow {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  /*   border:solid 1px white; */
+  transition: 0.5s;
+  overflow: hidden;
+}
+
+.arrow:hover {
+  /*  animation:borderAni 5s cubic-bezier(0, 0.6, 1, 0.4); */
+  border: solid 2px white;
+  border-radius: 50%;
+}
+.arrow:after {
+  position: absolute;
+  display: block;
+  content: "";
+  color: white;
+  width: 20px;
+  height: 15px;
+  /*   border:solid 1px;  */
+  top: -1px;
+  border-bottom: solid 2px;
+  transform: translatex(4px);
+}
+
+.arrow:before {
+  position: absolute;
+  display: block;
+  content: "";
+  color: white;
+  width: 8px;
+  height: 8px;
+  /*   border:solid 1px;  */
+  border-top: solid 2px;
+  border-left: solid 2px;
+  top: 50%;
+  left: 2px;
+  transform-origin: 0% 0%;
+  transform: rotatez(-45deg);
+}
+.arrow:hover:before {
+  animation: aniArrow01 1s cubic-bezier(0, 0.6, 1, 0.4) infinite 0.5s;
+}
+
+.arrow:hover:after {
+  animation: aniArrow02 1s cubic-bezier(0, 0.6, 1, 0.4) infinite 0.5s;
+}
+
+@keyframes aniArrow01 {
+  0% {
+    transform: rotatez(-45deg) translateY(30px) translateX(30px);
+  }
+  100% {
+    transform: rotatez(-45deg) translateY(-35px) translateX(-35px);
+  }
+}
+
+@keyframes aniArrow02 {
+  0% {
+    transform: translateX(45px);
+  }
+  100% {
+    transform: translateX(-44px);
+  }
+}
+
+@keyframes borderAni {
+  0% {
+    border: solid 2px white;
+  }
+  100% {
+    border: solid 2px white;
+    border-radius: 50%;
+  }
+}
+/* #endregion */

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Index</title>
+</head>
+<body>
+    {% if username %}
+        <p>Welcome, {{ username }}!</p>
+    {% else %}
+        <p>Welcome, Guest!</p>
+    {% endif %}
+
+    <a href="{{ url_for('auth.logout') }}">Logout</a>
+</body>
+</html>
