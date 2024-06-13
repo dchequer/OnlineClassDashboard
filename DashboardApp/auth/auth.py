@@ -92,7 +92,7 @@ def logout():
 
 
     # redirect to the login page
-    return redirect(url_for('home.home')) 
+    return redirect(url_for('core.home')) 
 
 
 def create_session(user: User):

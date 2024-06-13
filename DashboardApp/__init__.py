@@ -2,18 +2,20 @@
 from flask import Flask, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+import os
 
 db = SQLAlchemy()
 migrate = Migrate()
 
 def create_app():
+    # init app and configs
     app = Flask(__name__)
-    app.config['DEBUG'] = True
-    app.secret_key = 'secret_key'
+    app.config['DEBUG'] = os.environ.get('DEBUG', False)
+    app.secret_key = os.environ.get('SECRET_KEY', 'secret_key')
 
     # init database engine
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = 'False'
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI')
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = os.environ.get('SQLALCHEMY_TRACK_MODIFICATIONS')
     db.init_app(app)
 
     # init migration engine
