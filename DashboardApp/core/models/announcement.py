@@ -2,8 +2,9 @@ from __future__ import annotations
 from datetime import datetime
 from DashboardApp import db
 
+
 class Announcement(db.Model):
-    __tablename__ = 'announcement'
+    __tablename__ = "announcement"
 
     # identifiers
     id = db.Column(db.Integer, primary_key=True)
@@ -13,6 +14,4 @@ class Announcement(db.Model):
     title = db.Column(db.String(32), nullable=False)
     content = db.Column(db.String(256), nullable=False)
     author = db.Column(db.String(16), nullable=False)
-    subject_id = db.Column(db.Integer, db.ForeignKey('subject.id'), nullable=False)
-
-    
+    subject_id = db.Column(db.Integer, db.ForeignKey("subject.id"), nullable=False)

@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 app = create_app()
 
 if __name__ == "__main__":
-    print('Running app.py')
+    print("Running app.py")
     # load environment variables
     load_dotenv()
 

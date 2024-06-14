@@ -3,8 +3,9 @@ from __future__ import annotations
 from datetime import datetime
 from DashboardApp import db
 
+
 class User(db.Model):
-    __tablename__ = 'user'
+    __tablename__ = "user"
 
     id = db.Column(db.Integer, primary_key=True)
     created_timestamp = db.Column(db.DateTime, nullable=False, default=datetime.now())
@@ -12,22 +13,22 @@ class User(db.Model):
     password = db.Column(db.String(32), nullable=False)
     last_login = db.Column(db.DateTime, nullable=True, default=datetime.now())
     last_logout = db.Column(db.DateTime, nullable=True, default=None)
-    
+
     def __init__(self, username: str, password: str) -> None:
         self.username = username
         self.password = password
 
     def __repr__(self) -> str:
-        return f'<User {self.username}>'
+        return f"<User {self.username}>"
 
     def save(self) -> None:
         db.session.add(self)
         db.session.commit()
-    
+
     def delete(self) -> None:
         db.session.delete(self)
         db.session.commit()
-    
+
     def login(self) -> None:
         self.last_login = datetime.now()
         db.session.commit()
@@ -38,19 +39,19 @@ class User(db.Model):
 
     def get(self, args: str) -> list:
         print(args)
-        return [getattr(self, arg.strip()) for arg in args.split(',')]
+        return [getattr(self, arg.strip()) for arg in args.split(",")]
 
     @staticmethod
     def user_exists(username) -> bool:
         return User.query.filter_by(username=username).first() is not None
-    
+
     @staticmethod
     def authenticate(username, password) -> User | None:
         user = User.query.filter_by(username=username).first()
         if user and user.password == password:
             return user
         return None
-    
+
     @staticmethod
     def get_timestamp(id) -> datetime | None:
         user = User.query.filter_by(id=id).first()
@@ -59,9 +60,7 @@ class User(db.Model):
         else:
             print(f"No user found with id: {id}")
             return None
-    
+
     @staticmethod
     def get_user(id) -> User:
         return User.query.filter_by(id=id).first()
-
-

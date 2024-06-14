@@ -26,7 +26,12 @@ def login():
         else:
             # if the user is not authenticated, show an error message
             print("User not authenticated")
-            return render_template("login.html", username=username, password=password, error_message="⚠️ Invalid username or password.")
+            return render_template(
+                "login.html",
+                username=username,
+                password=password,
+                error_message="⚠️ Invalid username or password.",
+            )
 
     return render_template("login.html")
 
@@ -52,7 +57,7 @@ def signup():
             if password != confirm_password:
                 print("Passwords do not match")
                 error_message = "⚠️ Passwords do not match."
-            
+
             # if username already exists
             elif User.user_exists(username):
                 print("Username already exists")
@@ -67,9 +72,15 @@ def signup():
                 create_session(new_user)
 
                 return redirect(url_for("core.home"))
-            
+
             # return the signup page with the error message
-            return render_template("signup.html", username=username, password=password, confirm_password=confirm_password, error_message=error_message)
+            return render_template(
+                "signup.html",
+                username=username,
+                password=password,
+                confirm_password=confirm_password,
+                error_message=error_message,
+            )
 
     return render_template("signup.html")
 
@@ -80,7 +91,7 @@ def logout():
     if "user_id" not in session:
         print("User not logged in")
         return redirect(url_for("auth.login"))
-    
+
     # get the user object
     user = User.get_user(session["user_id"])
 
@@ -90,9 +101,8 @@ def logout():
     # Clear the user session
     session.clear()
 
-
     # redirect to the login page
-    return redirect(url_for('core.home')) 
+    return redirect(url_for("core.home"))
 
 
 def create_session(user: User):
