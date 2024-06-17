@@ -54,7 +54,7 @@
       <div class="subjects-grid-container">
         {% for subject in subjects %}
             <div class="subject-card">
-                <h2>{{ subject.name }}</h2>
+                <h2 id="name" class="subject-info">{{ subject.name }}</h2>
                 <p id="code" class="subject-info">Code: {{ subject.code }}</p>
                 <p id="instructor" class="subject-info">Instructor: {{ subject.instructor }}</p>
                 <p id="contact-info" class="subject-info">Contact Info: {{ subject.contact_info }}</p>
