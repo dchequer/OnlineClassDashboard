@@ -26,6 +26,10 @@ def create_app():
 
     # import models
     from DashboardApp.auth.models.user import User
+    from DashboardApp.core.models.announcement import Announcement
+    from DashboardApp.core.models.deliverable import Deliverable
+    from DashboardApp.core.models.meeting import Meeting
+    from DashboardApp.core.models.subject import Subject
 
     # create tables and models
     with app.app_context():
@@ -34,11 +38,13 @@ def create_app():
 
     # import blueprints
     from DashboardApp.auth import auth
-
     app.register_blueprint(auth.auth_bp, url_prefix="/auth")
+    
     from DashboardApp.core import core
-
     app.register_blueprint(core.core_bp, url_prefix="/core")
+
+    from DashboardApp.core import subject
+    app.register_blueprint(subject.subject_bp, url_prefix="/core")
 
     # redirect to /auth/login
     @app.route("/")

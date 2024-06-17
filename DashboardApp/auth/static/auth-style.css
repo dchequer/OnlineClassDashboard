@@ -1,3 +1,24 @@
+/* DashboardApp/auth/static/auth-style.css */
+
+:root {
+  /* Background Color */
+  --color-background: #1e1e1e;
+
+  /* Primary Palette */
+  --color-primary: #b91717;
+
+  /* Secondary Palette */
+  --color-secondary: #8d89a6;
+
+  /* Accent Colors */
+  --color-accent1: #d9d9d9;
+  --color-accent2: #ffffff;
+
+  /* Neutrals (Optional, adjust as needed) */
+  --color-text: #ffffff; /* Assuming light text for dark background */
+  --color-border: #d9d9d9; /* A neutral border color */
+}
+
 html,
 body {
   height: 100%;
@@ -5,6 +26,8 @@ body {
   overflow: hidden;
   position: relative;
   font-family: MuseoModerno;
+  background-color: var(--color-background);
+  color: var(--color-text);
 }
 
 #background {
@@ -38,7 +61,7 @@ body {
   /* style */
   border-radius: 4vw;
   opacity: 0.99;
-  background: #1e1e1e;
+  background: var(--color-background);
 
   /* Flexbox properties for centering children */
   display: flex;
@@ -57,7 +80,7 @@ body {
   margin-bottom: 25px;
 
   /* typography */
-  color: #fff;
+  color: var(--color-text);
   text-align: center;
   font-size: calc(3em + 1vw);
   font-style: normal;
@@ -71,7 +94,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #b917177F;
+  background-color: var(--color-primary);
   border-radius: 1em;
   margin-bottom: 10px;
   width: 110%;
@@ -84,7 +107,6 @@ body {
   font-weight: 400;
   line-height: normal;
   margin: 0.5em;
-
 }
 
 #login-form,
@@ -114,7 +136,7 @@ body {
   outline: none;
   border-radius: 15px;
   padding: 1em;
-  background-color: #ccc;
+  background-color: var(--color-accent1);
   box-shadow: inset 2px 5px 10px rgba(0, 0, 0, 0.3);
   transition: 300ms ease-in-out;
   height: 1.5em;
@@ -123,15 +145,15 @@ body {
 #username-field:focus,
 #password-field:focus,
 #confirm-password-field:focus {
-  background-color: white;
+  background-color: var(--color-accent2);
   transform: scale(1.05);
   box-shadow: 5px 5px 10px #969696, -5px -5px 10px #8f8f8f;
 }
 
 .subtitle {
   margin: 0;
-  margin-bottom: .5em;
-  color: #1e1e1e;
+  margin-bottom: 0.5em;
+  color: var(--color-background);
   transition: color 300ms ease-in-out;
 }
 
@@ -144,7 +166,7 @@ body {
 #username-field:not(:placeholder-shown) + #username-subtitle,
 #password-field:not(:placeholder-shown) + #password-subtitle,
 #confirm-password-field:not(:placeholder-shown) + #confirm-password-subtitle {
-  color: #fff;
+  color: var(--color-text);
 }
 /* #endregion */
 
@@ -168,7 +190,7 @@ body {
   overflow: hidden;
   transition-duration: 0.3s;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
-  background-color: #ca0303;
+  background-color: var(--color-primary);
   font-size: calc(0.5em + 0.5vw);
 }
 
@@ -186,7 +208,7 @@ body {
 }
 
 .sign svg path {
-  fill: white;
+  fill: var(--color-text);
 }
 /* text */
 .text {
@@ -195,7 +217,7 @@ body {
   right: 0%;
   width: 0%;
   opacity: 0;
-  color: white;
+  color: var(--color-text);
   font-size: 1em;
   font-weight: 400;
   transition-duration: 0.3s;

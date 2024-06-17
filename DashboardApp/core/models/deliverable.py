@@ -16,7 +16,7 @@ class Deliverable(db.Model):
     assigned_date = db.Column(db.DateTime, nullable=False)
     due_date = db.Column(db.DateTime, nullable=False)
     subject_id = db.Column(db.Integer, db.ForeignKey("subject.id"), nullable=False)
-    meeting_id = db.Column(db.Integer, db.ForeignKey("meeting"), nullable=False)
+    meeting_id = db.Column(db.Integer, db.ForeignKey("meeting.id"), nullable=False)
     status = db.Column(db.String(16), nullable=False, default="pending")
     grade = db.Column(db.Integer, nullable=True, default=None)
 
@@ -37,3 +37,36 @@ class Deliverable(db.Model):
         self.due_date = due_date
         self.subject_id = subject_id
         self.meeting_id = meeting_id
+
+    def save(self) -> None:
+        db.session.add(self)
+        db.session.commit()
+
+    def delete(self) -> None:
+        db.session.delete(self)
+        db.session.commit()
+
+    @staticmethod
+    def get_deliverable(deliverable_id: int) -> Deliverable:
+        return Deliverable.query.filter_by(id=deliverable_id).first()
+    
+    @staticmethod
+    def get_all_deliverables() -> list[Deliverable]:
+        return Deliverable.query.all()
+    
+    @staticmethod
+    def get_deliverables_by_subject(subject_id: int) -> list[Deliverable]:
+        return Deliverable.query.filter_by(subject_id=subject_id).all()
+    
+    @staticmethod
+    def get_deliverables_by_meeting(meeting_id: int) -> list[Deliverable]:
+        return Deliverable.query.filter_by(meeting_id=meeting_id).all()
+    
+    @staticmethod
+    def search_deliverables(search_term: str) -> list[Deliverable]:
+        return Deliverable.query.filter(Deliverable.title.ilike(f"%{search_term}%")).all()
+    
+    @staticmethod
+    def get_deliverables_by_status(status: str) -> list[Deliverable]:
+        return Deliverable.query.filter_by(status=status).all()
+    

@@ -1,0 +1,117 @@
+/* DashboardApp/core/static/css/subject-style.css */
+:root {
+  /* Background Color */
+  --color-background: #1e1e1e;
+
+  /* Primary Palette */
+  --color-primary: #b91717;
+
+  /* Secondary Palette */
+  --color-secondary: #8d89a6;
+
+  /* Accent Colors */
+  --color-accent1: #d9d9d9;
+  --color-accent2: #ffffff;
+
+  /* Neutrals (Optional, adjust as needed) */
+  --color-text: #ffffff; /* Assuming light text for dark background */
+  --color-border: #d9d9d9; /* A neutral border color */
+}
+html,
+body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  position: relative;
+  font-family: MuseoModerno;
+  background-color: var(--color-background);
+}
+
+#page-title{
+  color: var(--color-text);
+
+}
+
+/* #region New Subject Modal */
+/* Modal Styles */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: var(--color-background);
+  background-color: var(var(--color-accent1));
+}
+
+.modal-content {
+  background-color: var(--color-border);
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+.close {
+  color: var(--color-background);
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Required field asterisk */
+.required {
+  color: red;
+}
+/* #endregion New Subject Modal */
+
+/* #region Subject Grid */
+.subjects-grid-container {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(250px, 1fr)
+  ); /* Creates a responsive grid */
+  gap: 20px; /* Space between cards */
+  padding: 20px; /* Padding around the grid */
+}
+
+.subject-card {
+  background-color: var(--color-secondary); /* Card background color */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Simple shadow for depth */
+  border-radius: 10px; /* Rounded corners */
+  overflow: hidden; /* Ensures content fits within the rounded corners */
+  padding: 20px; /* Padding inside the card */
+  display: flex; /* Flexbox layout for the card's content */
+  flex-direction: column; /* Stack content vertically */
+}
+
+.subject-card h3 {
+  margin-top: 0;
+  color: #333; /* Title color */
+}
+
+.subject-card p {
+  flex-grow: 1; /* Allows the paragraph to fill available space, pushing any buttons to the bottom */
+  color: var(--color-text); /* Text color */
+}
+
+@media (max-width: 600px) {
+  .subjects-grid-container {
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(200px, 1fr)
+    ); /* Adjust column size on smaller screens */
+  }
+}
+/* #endregion Subject Grid */

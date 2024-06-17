@@ -1,1 +1,15 @@
 Single-database configuration for Flask.
+
+To start a new migration:
+In the command prompt, enter the following command:
+```
+flask db init
+```
+
+To upgrade to a new migration:
+In the command prompt, enter the following command:
+```
+flask db migrate
+```
+
+To 

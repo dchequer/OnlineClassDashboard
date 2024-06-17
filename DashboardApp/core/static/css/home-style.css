@@ -1,0 +1,98 @@
+/* DashboardApp/core/static/css/home-style.css */
+:root {
+  /* Background Color */
+  --color-background: #1e1e1e;
+
+  /* Primary Palette */
+  --color-primary: #b91717;
+
+  /* Secondary Palette */
+  --color-secondary: #8d89a6;
+
+  /* Accent Colors */
+  --color-accent1: #d9d9d9;
+  --color-accent2: #ffffff;
+
+  /* Neutrals (Optional, adjust as needed) */
+  --color-text: #ffffff; /* Assuming light text for dark background */
+  --color-border: #d9d9d9; /* A neutral border color */
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  position: relative;
+  font-family: MuseoModerno;
+  background-color: var(--color-background);
+}
+
+/* #region Sidebar */
+.sidebar {
+  height: 100%;
+  width: 50px; /* Initial width */
+  position: relative;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: var(--color-primary);
+  overflow-x: hidden;
+  transition: 0.5s; /* Smooth transition */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center; /* Center-align the text within the links */
+  /* Ensure the sidebar has a defined height if it's not already full-screen or of a specific size */
+  height: 100vh; /* Example: full viewport height */
+}
+
+.sidebar a {
+  display: inline-block;
+  align-items: center;
+  text-decoration: none;
+  font-size: 25px;
+  color: var(--color-text); /* Assuming you have a color variable for text */
+  width: 100%; /* Make link width same as sidebar */
+  padding: 10px 0; /* Add some padding for spacing, adjust as needed */
+}
+
+.sidebar .burger{
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.sidebar a:hover {
+  color: var(--color-accent1);
+}
+
+.sidebar .icon {
+  display: inline-block;
+}
+
+.sidebar .text {
+  display: none; /* Hide text initially */
+}
+
+#menu {
+  list-style-type: none; /* Removes the bullet points */
+  padding: 0; /* Removes padding, especially on the left side, which is often added by browsers by default */
+  margin: 0; /* Removes any default margin */
+}
+
+#main-content {
+  margin-left: 50px; /* Same as sidebar initial width */
+  padding: 20px;
+}
+
+/* Expanded sidebar */
+.sidebar.expanded {
+  width: 250px;
+}
+
+.sidebar.expanded .text {
+  display: inline-flex; /* Show text when expanded */
+}
+/* #endregion Sidebar */
