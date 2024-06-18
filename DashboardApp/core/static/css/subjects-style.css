@@ -7,6 +7,15 @@
   margin: 0;
 }
 
+/* #region Controls */
+#controls {
+  display: inline-block;
+}
+#controls input{
+  border-radius: 1vh;
+}
+/* #endregion */
+
 /* #region New Subject Modal */
 /* Modal Styles */
 .modal {

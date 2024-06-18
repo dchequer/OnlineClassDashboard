@@ -2,7 +2,7 @@
 
 
 {% block head_extra %}
-<link rel="stylesheet" href="{{ url_for('core.static', filename='css/subject-style.css') }}">
+<link rel="stylesheet" href="{{ url_for('core.static', filename='css/subjects-style.css') }}">
 {% endblock %}
 
 {% block title %}Subjects{% endblock %}
@@ -11,24 +11,28 @@
 {% block content %}
 <h1 id="page-title">Subjects</h1>
 <!-- Button to Open Modal -->
-<button id="add-subject-button">Add New Subject</button>
-
+<div id="controls">
+  <button id="add-subject-button">Add New Subject</button>
+  <input type="text" id="class-name-filter" placeholder="Clas Name" class="filter">
+  <input type="text" id="instructor-name-filter" placeholder="Instructor Name" class="filter">
+  <button id="filter-subjects-button">Filter</button>
+</div>
 <!-- Modal Structure -->
 <div id="add-subject-modal" class="modal" style="display: none;">
   <div class="modal-content">
     <span class="close">&times;</span>
     <form id="add-subject-form" method="post">
       <label for="name">Subject Name <span class="required">*</span></label>
-      <input type="text" id="name" name="name" required />
+      <input type="text" id="name" name="name" placeholder="Name" required />
 
       <label for="code">Subject Code <span class="required">*</span></label>
-      <input type="text" id="code" name="code" required />
+      <input type="text" id="code" name="code" placeholder="CLS101" required />
 
       <label for="instructor">Instructor</label>
-      <input type="text" id="instructor" name="instructor" />
+      <input type="text" id="instructor" name="instructor" placeholder="Mr. Prof" />
 
       <label for="contact-info">Contact Info <span class="required">*</span></label>
-      <input type="text" id="contact-info" name="contact-info" required />
+      <input type="text" id="contact-info" name="contact-info" placeholder="name@email.com" required />
 
       <label for="description">Description</label>
       <textarea id="description" name="description"></textarea>
@@ -41,7 +45,7 @@
 <!-- Subjects Grid Container -->
 <div class="subjects-grid-container">
   {% for subject in subjects %}
-  <div class="subject-card">
+  <div id="{{ subject.name }} card" class="subject-card" onclick="openSubject(this)">
     <h2 id="name" class="subject-info">{{ subject.name }}</h2>
     <p id="code" class="subject-info">Code: {{ subject.code }}</p>
     <p id="instructor" class="subject-info">Instructor: {{ subject.instructor }}</p>
@@ -50,7 +54,7 @@
   </div>
   {% endfor %}
 </div>
-<script src=" {{ url_for('core.static', filename='js/subject-scripts.js') }}"></script>
+<script src=" {{ url_for('core.static', filename='js/subjects-scripts.js') }}"></script>
 {% endblock %}
 
 {% block scripts %}

@@ -4,17 +4,21 @@
 // Get modal element
 var modal = document.getElementById("add-subject-modal");
 // Get button that opens the modal
-var btn = document.getElementById("add-subject-button");
+var openModalButton = document.getElementById("add-subject-button");
 // Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+var closeSpan = document.getElementsByClassName("close")[0];
+// Get the button that filters cards
+var filterButton = document.getElementById("filter-subjects-button")
 
+
+/* Modal */
 // When the user clicks the button, open the modal
-btn.onclick = function () {
+openModalButton.onclick = function () {
   modal.style.display = "block";
 };
 
 // When the user clicks on <span> (x), close the modal
-span.onclick = function () {
+closeSpan.onclick = function () {
   modal.style.display = "none";
 };
 
@@ -25,3 +29,8 @@ window.onclick = function (event) {
   }
 };
 
+/* Cards */
+// on click open specific assignment
+function openSubject(subjectCard){
+  console.log(subjectCard.id);
+}
