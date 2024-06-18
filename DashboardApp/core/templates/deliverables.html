@@ -13,7 +13,7 @@
 <!-- Button to Open Modal -->
 <div id="controls">
     <button id="add-deliverable-button">Add New Deliverable</button>
-    
+
     <button id="filter-deliverables-button">Filter</button>
 </div>
 <!-- Modal Structure -->
@@ -42,11 +42,13 @@
 
 <!-- Subjects Grid Container -->
 <div class="deliverable-grid-container">
-    {% for deliverable in deliverables %}
+    {% for match in deliverables %}
+    {% set deliverable = match[0] %}
     <div id="{{ deliverable.name }} card" class="deliverable-card" onclick="openDeliverable(this)">
         <h2 id="title" class="deliverable-info">{{ deliverable.title }}</h2>
-        <p id="assigned-date" class="deliverable-info">Code: {{ deliverable.assigned_date }}</p>
-        <p id="due-date" class="deliverable-info">Instructor: {{ deliverable.due_date }}</p>
+        <p id="assigned-date" class="deliverable-info">Assigned Date: {{ deliverable.assigned_date.strftime('%Y-%m-%d')
+            }}</p>
+        <p id="due-date" class="deliverable-info">Due Date: {{ deliverable.due_date.strftime('%Y-%m-%d') }}</p>
         <!-- subject and meeting ID joins -->
         <p id="description" class="deliverable-info">Description: {{ deliverable.description }}</p>
     </div>

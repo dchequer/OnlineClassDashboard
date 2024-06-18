@@ -1,7 +1,9 @@
 from __future__ import annotations
 from datetime import datetime
+from typing import List
 from DashboardApp import db
-
+from .subject import Subject
+from sqlalchemy.orm import Query
 
 class Deliverable(db.Model):
     __tablename__ = "deliverable"
@@ -38,6 +40,9 @@ class Deliverable(db.Model):
         self.subject_id = subject_id
         self.meeting_id = meeting_id
 
+    def __repr__(self) -> str:
+        return f"<Deliverable {self.title}>"
+
     def save(self) -> None:
         db.session.add(self)
         db.session.commit()
@@ -46,27 +51,36 @@ class Deliverable(db.Model):
         db.session.delete(self)
         db.session.commit()
 
+    def limit_query_to_owner(owner_id: int) -> Query:
+        return Deliverable.query.join(Subject, Deliverable.subject_id == Subject.id) \
+                             .filter(Subject.owner_id == owner_id) \
+                             .with_entities(Deliverable, Subject)
+
+    @staticmethod
+    def deliverable_exists(owner_id: int, title: str) -> bool:
+        return Deliverable.limit_query_to_owner(owner_id).filter_by(title=title).first() is not None
+
     @staticmethod
     def get_deliverable(owner_id: int, deliverable_id: int) -> Deliverable:
-        return Deliverable.query.filter_by(id=deliverable_id).first()
+        return Deliverable.limit_query_to_owner(owner_id).filter_by(id=deliverable_id).first()
     
     @staticmethod
     def get_all_deliverables(owner_id: int) -> list[Deliverable]:
-        return Deliverable.query.all()
+        return Deliverable.limit_query_to_owner(owner_id).all()
     
     @staticmethod
     def get_deliverables_by_subject(owner_id: int, subject_id: int) -> list[Deliverable]:
-        return Deliverable.query.filter_by(subject_id=subject_id).all()
+        return Deliverable.limit_query_to_owner(owner_id).filter_by(subject_id=subject_id).all()
     
     @staticmethod
     def get_deliverables_by_meeting(owner_id: int, meeting_id: int) -> list[Deliverable]:
-        return Deliverable.query.filter_by(meeting_id=meeting_id).all()
+        return Deliverable.limit_query_to_owner(owner_id).filter_by(meeting_id=meeting_id).all()
     
     @staticmethod
     def search_deliverables(owner_id: int, search_term: str) -> list[Deliverable]:
-        return Deliverable.query.filter(Deliverable.title.ilike(f"%{search_term}%")).all()
+        return Deliverable.limit_query_to_owner(owner_id).filter_by(Deliverable.title.ilike(f"%{search_term}%")).all()
     
     @staticmethod
     def get_deliverables_by_status(owner_id: int, status: str) -> list[Deliverable]:
-        return Deliverable.query.filter_by(status=status).all()
+        return Deliverable.limit_query_to_owner(owner_id=owner_id).filter_by(status=status).all()
     

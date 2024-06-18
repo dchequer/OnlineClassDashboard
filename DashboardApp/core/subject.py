@@ -31,6 +31,5 @@ def subjects():
             print("Subject already exists")
             return render_template('subjects.html', error="Subject already exists")
 
-    subjects = get_subjects()
-    return render_template('subjects.html', subjects=subjects)
+    return render_template('subjects.html', subjects=get_subjects())
 

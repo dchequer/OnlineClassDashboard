@@ -31,6 +31,6 @@ window.onclick = function (event) {
 
 /* Cards */
 // on click open specific assignment
-function openDeliverable(deliverable){
-  console.log(deliverable.id);
+function openDeliverable(deliverableCard) {
+  console.log(deliverableCard.id);
 }
