@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- general settings -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <!-- MuseoModerno font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet" />
+
+    <!-- global css -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='global-style.css') }}" />
+    {% block head_extra %}{% endblock %}
+    <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+    <div id="page-container">
+        <!-- Include global sidebar -->
+        <div id="sidebar" class="sidebar">
+            <span id="burger" onclick="toggleSidebar()">☰</span>
+
+            <ul id="menu">
+                <!-- Icons with text; text hidden when collapsed -->
+                <li>
+                    <a href="/core/home">
+                        <span id="home-icon" class="icon">🏠</span>
+                        <span id="home-text" class="text">Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span id="deliverables-icon" class="icon">📋</span>
+                        <span id="deliverables-text" class="text">Deliverables</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/core/subjects">
+                        <span id="subjects-icon" class="icon">📖</span>
+                        <span id="subjects-text" class="text">Subjects</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span id="settings-icon" class="icon">⚙️</span>
+                        <span id="settings-text" class="text">Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- insert custom content for inherited content -->
+        <div id="content">{% block content %} {% endblock %}</div>
+
+        <!-- include global scripts -->
+        <script src="{{ url_for('static', filename='global-scripts.js') }}"></script>
+
+        <!-- include custom script -->
+        {% block scripts %}{% endblock %}
+    </div>
+</body>
+
+</html>

@@ -1,35 +1,10 @@
 /* DashboardApp/core/static/css/subject-style.css */
-:root {
-  /* Background Color */
-  --color-background: #1e1e1e;
 
-  /* Primary Palette */
-  --color-primary: #b91717;
-
-  /* Secondary Palette */
-  --color-secondary: #8d89a6;
-
-  /* Accent Colors */
-  --color-accent1: #d9d9d9;
-  --color-accent2: #ffffff;
-
-  /* Neutrals (Optional, adjust as needed) */
-  --color-text: #ffffff; /* Assuming light text for dark background */
-  --color-border: #d9d9d9; /* A neutral border color */
-}
-html,
-body {
-  height: 100%;
-  margin: 0;
-  overflow: hidden;
-  position: relative;
-  font-family: MuseoModerno;
-  background-color: var(--color-background);
-}
-
-#page-title{
+#page-title {
+  font-size: 2rem;
+  font-weight: 700;
   color: var(--color-text);
-
+  margin: 0;
 }
 
 /* #region New Subject Modal */
@@ -94,16 +69,19 @@ body {
   padding: 20px; /* Padding inside the card */
   display: flex; /* Flexbox layout for the card's content */
   flex-direction: column; /* Stack content vertically */
+  margin-right: 25px;
 }
 
-.subject-card h3 {
+.subject-card h2 {
+  /* subject title */
   margin-top: 0;
-  color: #333; /* Title color */
+  color: #333;
 }
 
 .subject-card p {
+  /* suject info */
   flex-grow: 1; /* Allows the paragraph to fill available space, pushing any buttons to the bottom */
-  color: var(--color-text); /* Text color */
+  color: var(--color-text);
 }
 
 @media (max-width: 600px) {
@@ -113,5 +91,11 @@ body {
       minmax(200px, 1fr)
     ); /* Adjust column size on smaller screens */
   }
+}
+
+.subject-card:hover{
+  transform: translate(2px, 2px);
+  transition: all .1s ease-in-out;
+  border: 5px solid var(--color-accent1);
 }
 /* #endregion Subject Grid */

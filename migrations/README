@@ -1,15 +1,23 @@
 Single-database configuration for Flask.
 
-To start a new migration:
+To set up migrations
 In the command prompt, enter the following command:
+(This only has to be done the first time)
 ```
 flask db init
 ```
 
-To upgrade to a new migration:
-In the command prompt, enter the following command:
+The last command will create a migrations folder in root directory.
+
+To start a new migration:
+If a change is made to any of the models, run the following command:
 ```
 flask db migrate
 ```
 
-To 
+This command will create a python script in the migrations/versions folder that reflects the detected changes
+
+Finally to "push" these changes to the sqlite database, run this command:
+```
+flask db upgrade
+```

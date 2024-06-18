@@ -10,7 +10,7 @@ migrate = Migrate()
 
 def create_app():
     # init app and configs
-    app = Flask(__name__)
+    app = Flask(__name__, static_url_path="/static", static_folder="static")
     app.config["DEBUG"] = os.environ.get("DEBUG", False)
     app.secret_key = os.environ.get("SECRET_KEY", "secret_key")
 
