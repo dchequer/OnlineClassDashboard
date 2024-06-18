@@ -2,6 +2,7 @@
 from flask import Flask, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from dotenv import load_dotenv
 import os
 
 db = SQLAlchemy()
@@ -9,9 +10,14 @@ migrate = Migrate()
 
 
 def create_app():
+    # load environment variables
+    load_dotenv()
+
     # init app and configs
     app = Flask(__name__, static_url_path="/static", static_folder="static")
     app.config["DEBUG"] = os.environ.get("DEBUG", False)
+    app.config["ENV"] = os.environ.get("ENV", "development")
+
     app.secret_key = os.environ.get("SECRET_KEY", "secret_key")
 
     # init database engine
