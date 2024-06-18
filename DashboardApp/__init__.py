@@ -43,9 +43,13 @@ def create_app():
     from DashboardApp.core import core
     app.register_blueprint(core.core_bp, url_prefix="/core")
 
+    from DashboardApp.core import deliverable
+    app.register_blueprint(deliverable.deliverable_bp, url_prefix="/core")
+
     from DashboardApp.core import subject
     app.register_blueprint(subject.subject_bp, url_prefix="/core")
 
+    
     # redirect to /auth/login
     @app.route("/")
     def core():

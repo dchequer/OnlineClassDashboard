@@ -13,7 +13,7 @@
 <!-- Button to Open Modal -->
 <div id="controls">
   <button id="add-subject-button">Add New Subject</button>
-  <input type="text" id="class-name-filter" placeholder="Clas Name" class="filter">
+  <input type="text" id="class-name-filter" placeholder="Class Name" class="filter">
   <input type="text" id="instructor-name-filter" placeholder="Instructor Name" class="filter">
   <button id="filter-subjects-button">Filter</button>
 </div>
@@ -54,9 +54,8 @@
   </div>
   {% endfor %}
 </div>
-<script src=" {{ url_for('core.static', filename='js/subjects-scripts.js') }}"></script>
 {% endblock %}
 
 {% block scripts %}
-<script src="{{ url_for('core.static', filename='js/home-scripts.js') }}"></script>
+<script src="{{ url_for('core.static', filename='js/subjects-scripts.js') }}"></script>
 {% endblock %}

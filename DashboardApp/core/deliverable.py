@@ -11,11 +11,11 @@ def get_deliverables():
 
     return subjects
 
-@deliverable_bp.route('/subjects', methods=['GET', 'POST'])
+@deliverable_bp.route('/deliverables', methods=['GET', 'POST'])
 def deliverables():
     if request.method == 'POST':
        pass
 
     deliverables = get_deliverables()
-    return render_template('subjects.html', deliverables=deliverables)
+    return render_template('deliverables.html', deliverables=deliverables)
 

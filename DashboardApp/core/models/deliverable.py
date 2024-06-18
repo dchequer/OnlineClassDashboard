@@ -47,26 +47,26 @@ class Deliverable(db.Model):
         db.session.commit()
 
     @staticmethod
-    def get_deliverable(deliverable_id: int) -> Deliverable:
+    def get_deliverable(owner_id: int, deliverable_id: int) -> Deliverable:
         return Deliverable.query.filter_by(id=deliverable_id).first()
     
     @staticmethod
-    def get_all_deliverables() -> list[Deliverable]:
+    def get_all_deliverables(owner_id: int) -> list[Deliverable]:
         return Deliverable.query.all()
     
     @staticmethod
-    def get_deliverables_by_subject(subject_id: int) -> list[Deliverable]:
+    def get_deliverables_by_subject(owner_id: int, subject_id: int) -> list[Deliverable]:
         return Deliverable.query.filter_by(subject_id=subject_id).all()
     
     @staticmethod
-    def get_deliverables_by_meeting(meeting_id: int) -> list[Deliverable]:
+    def get_deliverables_by_meeting(owner_id: int, meeting_id: int) -> list[Deliverable]:
         return Deliverable.query.filter_by(meeting_id=meeting_id).all()
     
     @staticmethod
-    def search_deliverables(search_term: str) -> list[Deliverable]:
+    def search_deliverables(owner_id: int, search_term: str) -> list[Deliverable]:
         return Deliverable.query.filter(Deliverable.title.ilike(f"%{search_term}%")).all()
     
     @staticmethod
-    def get_deliverables_by_status(status: str) -> list[Deliverable]:
+    def get_deliverables_by_status(owner_id: int, status: str) -> list[Deliverable]:
         return Deliverable.query.filter_by(status=status).all()
     
