@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+
+{% block head_extra %}
+<link rel="stylesheet" href="{{ url_for('core.static', filename='css/meetings-style.css') }}">
+{% endblock %}
+
+{% block title %}Meetings{% endblock %}
+
+{% block errors %}
+
+{% endblock errors %}
+
+{% block content %}
+<h1 id="page-title">Meetings</h1>
+<!-- Button to Open Modal -->
+<div id="controls">
+  <button id="add-meeting-button">Add New meeting</button>
+  <input type="text" id="class-name-filter" placeholder="Class Name" class="filter">
+  <input type="text" id="instructor-name-filter" placeholder="Instructor Name" class="filter">
+  <button id="filter-meetings-button">Filter</button>
+</div>
+<!-- Modal Structure -->
+<div id="add-meeting-modal" class="modal" style="display: none;">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <form id="add-meeting-form" method="post">
+        <div class="form-input-container">
+            <label for="name">Name<span class="required">*</span></label>
+            <input type="text" id="name" name="name" placeholder="Name" required />
+        </div>
+
+        <div class="form-input-container">
+            <label for="date">Date<span class="required">*</span></label>
+            <input type="date" id="date" name="date" placeholder="mm/dd/yyyy" required />
+        </div>
+
+        <div class="form-input-container">
+            <label for="location">Location</label>
+            <input type="text" id="location" name="location" placeholder="Location"/>
+        </div>
+
+        <!-- get subject ID  -->
+        <div class="form-input-container">
+            <!-- drop down box for subjects related to current session -->
+            <label for="subject">Subject<span class="required">*</span></label>
+            <select id="subject-select" name="subject" required>
+                <option value="0">Select Subject</option>
+                <!-- JS will insert relevant subjects here -->
+            </select>
+        </div>
+
+        <div class="form-input-container">
+            <label for="description">Description</label>
+            <textarea id="description" name="description"></textarea>
+        </div>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>
+
+<!-- meetings Grid Container -->
+<div class="meetings-grid-container">
+  {% for meeting in meetings %}
+  <div id="{{ meeting.name }} card" class="meeting-card" onclick="openmeeting(this)">
+    <h2 id="name" class="meeting-info">{{ meeting.name }}</h2>
+    <p id="date" class="meeting-info">Date: {{ meeting.date.strftime('%Y-%m-%d') }}</p>
+    <p id="location" class="meeting-info">Location: {{ meeting.location }}</p>
+    <p id="subject" class="meeting-info">Subject: {{ meeting.subject }}</p>
+    <p id="description" class="meeting-info">Description: {{ meeting.description }}</p>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('core.static', filename='js/meetings-scripts.js') }}"></script>
+{% endblock %}

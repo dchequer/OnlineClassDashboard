@@ -1,19 +1,17 @@
-// DashboardApp/core/static/js/subject-scripts.js
+// DashboardApp/core/static/js/meetings-scripts.js
 var USER_ID;
 
-/* - - - DELIVERABLES PAGE - - - */
+/* - - - MEETINGS PAGE - - - */
 // Get modal element
-var modal = document.getElementById("add-deliverable-modal");
+var modal = document.getElementById("add-meeting-modal");
 // Get button that opens the modal
-var openModalButton = document.getElementById("add-deliverable-button");
+var openModalButton = document.getElementById("add-meeting-button");
 // Get the <span> element that closes the modal
 var closeSpan = document.getElementsByClassName("close")[0];
 // Get the button that filters cards
-var filterButton = document.getElementById("filter-deliverable-button");
+var filterButton = document.getElementById("filter-meetings-button")
 // Get the dropdown where the user selects the subject
 var subjectSelect = document.getElementById("subject-select");
-// Get the dropdown where the user selects the meeting
-var meetingSelect = document.getElementById("meeting-select");
 
 function fetchUserId() {
   return new Promise((resolve, reject) => {
@@ -48,13 +46,6 @@ closeSpan.onclick = function () {
   modal.style.display = "none";
 };
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function (event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-};
-
 // fetch user's subjects and populate the dropdown
 async function populateSubjectDropdown(USER_ID) {
   await fetch(`/api/subjects/user_id=${USER_ID}`)
@@ -69,31 +60,25 @@ async function populateSubjectDropdown(USER_ID) {
     });
 }
 
-function populateMeetingDropdown(USER_ID) {
-  fetch(`/api/meetings/user_id=${USER_ID}`)
-    .then((response) => response.json())
-    .then((data) => {
-      data.forEach((meeting) => {
-        var option = document.createElement("option");
-        option.text = meeting.name;
-        option.value = meeting.id;
-        meetingSelect.add(option);
-      });
-    });
-}
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+};
 
 /* - - - Cards - - - */
 // on click open specific assignment
-function openDeliverable(deliverableCard) {
-  console.log(deliverableCard.id);
+function openSubject(meetingCard) {
+  console.log(meetingCard);
+  console.log(meetingCard.id);
 }
 
-/* - - - MISC - - -*/
+/* - - - MISC - - - */
 // when page loads populate the dropdown
 async function populate() {
   await setUserId();
 
   populateSubjectDropdown(USER_ID);
-  populateMeetingDropdown(USER_ID);
 }
 populate();

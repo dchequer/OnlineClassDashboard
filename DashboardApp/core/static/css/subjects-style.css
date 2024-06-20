@@ -1,12 +1,5 @@
 /* DashboardApp/core/static/css/subject-style.css */
 
-#page-title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--color-text);
-  margin: 0;
-}
-
 /* #region Controls */
 #controls {
   display: inline-block;
@@ -15,49 +8,6 @@
   border-radius: 1vh;
 }
 /* #endregion */
-
-/* #region New Subject Modal */
-/* Modal Styles */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: var(--color-background);
-  background-color: var(var(--color-accent1));
-}
-
-.modal-content {
-  background-color: var(--color-border);
-  margin: 15% auto; /* 15% from the top and centered */
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
-}
-
-.close {
-  color: var(--color-background);
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-/* Required field asterisk */
-.required {
-  color: red;
-}
-/* #endregion New Subject Modal */
 
 /* #region Subject Grid */
 .subjects-grid-container {

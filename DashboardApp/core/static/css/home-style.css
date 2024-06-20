@@ -1,19 +1,5 @@
 /* DashboardApp/core/static/css/home-style.css */
 
-#page-container {
-  display: flex;
-  flex-direction: row;
-  height: 100vh;
-  transition: margin-left 0.5s ease;
-}
-
-#page-title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--color-text);
-  margin: 0;
-}
-
 #content {
   flex-grow: 1;
   min-width: calc(100vw - 50px);

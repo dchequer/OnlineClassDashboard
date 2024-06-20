@@ -23,23 +23,25 @@ def extract_date(date_string):
 @deliverable_bp.route("/deliverables", methods=["GET", "POST"])
 def deliverables():
     if request.method == "POST":
+        print(request.form)
         owner_id = session["user_id"]
-        deliverable_title = request.form["title"]
+        title = request.form["title"]
         assigned_date = extract_date(request.form["assigned-date"])
         due_date = extract_date(request.form["due-date"])
         description = request.form["description"]
 
-        subject_id = 1
-        meeting_id = 1
+        subject_id = request.form["subject"] if request.form["subject"]!="0" else None
+        meeting_id = request.form["meeting"] if request.form["meeting"]!="0" else None
 
         print(
-            f"Received new deliverable request: {owner_id=}, {deliverable_title=}, {assigned_date=}, {due_date=}, {subject_id=}, {meeting_id=}, {description=}"
+            f"Received new deliverable request: {owner_id=}, {title=}, {assigned_date=}, {due_date=}, {subject_id=}, {meeting_id=}, {description=}"
         )
         print("Checking if deliverable already exists...")
-        if not Deliverable.deliverable_exists(owner_id, deliverable_title):
+        if not Deliverable.deliverable_exists(owner_id, title):
             print("Deliverable does not exist. Creating new deliverable...")
             deliverable = Deliverable(
-                deliverable_title,
+                owner_id,
+                title,
                 description,
                 assigned_date,
                 due_date,
@@ -54,8 +56,6 @@ def deliverables():
             )
 
     deliverables = get_deliverables()
-    for deliverable in deliverables:
-        print(deliverable)
     return render_template("deliverables.html", deliverables=deliverables)
 
 

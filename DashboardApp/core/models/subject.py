@@ -1,7 +1,8 @@
 from __future__ import annotations
 from datetime import datetime
 from DashboardApp import db
-from typing import List
+from typing import List, Dict
+from sqlalchemy.orm import Query
 
 
 class Subject(db.Model):
@@ -13,8 +14,8 @@ class Subject(db.Model):
     owner_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
 
     # subject details
-    name = db.Column(db.String(16), nullable=False, unique=True)
-    code = db.Column(db.String(8), nullable=False, unique=True)
+    name = db.Column(db.String(16), nullable=False)
+    code = db.Column(db.String(8), nullable=False)
     instructor = db.Column(db.String(16), nullable=False)
     contact_info = db.Column(db.String(32), nullable=False)
     description = db.Column(db.String(32), nullable=True, default=None)
@@ -32,31 +33,49 @@ class Subject(db.Model):
         self.contact_info = contact_info
         self.description = description
     
-    def save(self):
+    def save(self) -> None:
         db.session.add(self)
         db.session.commit()
     
-    def delete(self):
+    def delete(self) -> None:
         db.session.delete(self)
         db.session.commit()
     
+    def __repr__(self) -> str:
+        return self.name
+
+    def to_dict(self) -> dict:
+        return {
+            "id": self.id,
+            "created_timestamp": self.created_timestamp,
+            "owner_id": self.owner_id,
+            "name": self.name,
+            "code": self.code,
+            "instructor": self.instructor,
+            "contact_info": self.contact_info,
+            "description": self.description
+        }
+
+    def limit_query_to_owner(owner_id: int) -> Query:
+        return Subject.query.filter_by(id=owner_id)
+
     @staticmethod
     def get_subject(owner_id: int, subject_id: int) -> List[Subject]:
-        return Subject.query.filter_by(owner_id=owner_id, id=subject_id).first()
+        return Subject.limit_query_to_owner(owner_id).filter_by(id=subject_id).first()
     
     @staticmethod
     def get_all_subjects(owner_id: int) -> list[Subject]:
-        return Subject.query.filter_by(owner_id=owner_id)
+        return Subject.limit_query_to_owner(owner_id).all() 
     
     @staticmethod
     def subject_exists(owner_id: int, subject_name: str) -> bool:
-        return Subject.query.filter_by(owner_id=owner_id, name=subject_name).first() is not None
+        return Subject.limit_query_to_owner(owner_id).filter_by(name=subject_name).first() is not None
     
     @staticmethod
     def get_subject_by_name(owner_id: int, subject_name: str) -> Subject:
-        return Subject.query.filter_by(owner_id=owner_id, name=subject_name).first()
+        return Subject.limit_query_to_owner(owner_id).filter_by(name=subject_name).first()
     
     @staticmethod
     def get_subject_by_code(owner_id: int, subject_code: str) -> Subject:
-        return Subject.query.filter_by(owner_id=owner_id, code=subject_code).first()
+        return Subject.limit_query_to_owner(owner_id).filter_by(code=subject_code).first()
     

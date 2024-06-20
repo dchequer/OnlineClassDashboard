@@ -11,14 +11,15 @@ class Deliverable(db.Model):
     # identifiers
     id = db.Column(db.Integer, primary_key=True)
     created_timestamp = db.Column(db.DateTime, nullable=False, default=datetime.now())
+    owner_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable = False)
 
     # deliverable details
     title = db.Column(db.String(32), nullable=False)
     description = db.Column(db.String(256), nullable=False)
     assigned_date = db.Column(db.DateTime, nullable=False)
     due_date = db.Column(db.DateTime, nullable=False)
-    subject_id = db.Column(db.Integer, db.ForeignKey("subject.id"), nullable=False)
-    meeting_id = db.Column(db.Integer, db.ForeignKey("meeting.id"), nullable=False)
+    subject_id = db.Column(db.Integer, db.ForeignKey("subject.id"), nullable=True)
+    meeting_id = db.Column(db.Integer, db.ForeignKey("meeting.id"), nullable=True)
     status = db.Column(db.String(16), nullable=False, default="pending")
     grade = db.Column(db.Integer, nullable=True, default=None)
 
@@ -26,6 +27,7 @@ class Deliverable(db.Model):
 
     def __init__(
         self,
+        owner_id: int,
         title: str,
         description: str,
         assigned_date: datetime,
@@ -33,6 +35,7 @@ class Deliverable(db.Model):
         subject_id: int,
         meeting_id: int,
     ) -> None:
+        self.owner_id = owner_id
         self.title = title
         self.description = description
         self.assigned_date = assigned_date
@@ -52,9 +55,7 @@ class Deliverable(db.Model):
         db.session.commit()
 
     def limit_query_to_owner(owner_id: int) -> Query:
-        return Deliverable.query.join(Subject, Deliverable.subject_id == Subject.id) \
-                             .filter(Subject.owner_id == owner_id) \
-                             .with_entities(Deliverable, Subject)
+        return Deliverable.query.filter_by(owner_id=owner_id)
 
     @staticmethod
     def deliverable_exists(owner_id: int, title: str) -> bool:

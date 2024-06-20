@@ -7,6 +7,9 @@
 
 {% block title %}Subjects{% endblock %}
 
+{% block errors %}
+
+{% endblock errors %}
 
 {% block content %}
 <h1 id="page-title">Subjects</h1>
@@ -22,20 +25,30 @@
   <div class="modal-content">
     <span class="close">&times;</span>
     <form id="add-subject-form" method="post">
-      <label for="name">Subject Name <span class="required">*</span></label>
-      <input type="text" id="name" name="name" placeholder="Name" required />
+      <div class="form-input-container">
+        <label for="name">Subject Name <span class="required">*</span></label>
+        <input type="text" id="name" name="name" placeholder="Name" required />
+      </div>
+      
+      <div class="form-input-container">
+        <label for="code">Subject Code <span class="required">*</span></label>
+        <input type="text" id="code" name="code" placeholder="CLS101" required />
+      </div>
 
-      <label for="code">Subject Code <span class="required">*</span></label>
-      <input type="text" id="code" name="code" placeholder="CLS101" required />
+      <div class="form-input-container">
+        <label for="instructor">Instructor</label>
+        <input type="text" id="instructor" name="instructor" placeholder="Mr. Prof" />
+      </div>
 
-      <label for="instructor">Instructor</label>
-      <input type="text" id="instructor" name="instructor" placeholder="Mr. Prof" />
+      <div class="form-input-container">
+        <label for="contact-info">Contact Info <span class="required">*</span></label>
+        <input type="text" id="contact-info" name="contact-info" placeholder="name@email.com" required />
+      </div>
 
-      <label for="contact-info">Contact Info <span class="required">*</span></label>
-      <input type="text" id="contact-info" name="contact-info" placeholder="name@email.com" required />
-
-      <label for="description">Description</label>
-      <textarea id="description" name="description"></textarea>
+      <div class="form-input-container">
+        <label for="description">Description</label>
+        <textarea id="description" name="description"></textarea>
+      </div>
 
       <button type="submit">Submit</button>
     </form>

@@ -12,5 +12,5 @@ if __name__ == "__main__":
 
     # extra files should contain all files for watching
     # ssl_context is 'adhoc' if no ssl keys are provided
-    print(config.ssl_context)
+    #print(config.ssl_context)
     app.run(extra_files=config.extra_files, ssl_context=config.ssl_context)

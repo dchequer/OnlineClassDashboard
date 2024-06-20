@@ -7,6 +7,9 @@
 
 {% block title %}Home Page{% endblock %}
 
+{% block errors %}
+
+{% endblock errors %}
 
 {% block content %}
 <h1 id="page-title">Deliverables</h1>
@@ -21,19 +24,44 @@
     <div class="modal-content">
         <span class="close">&times;</span>
         <form id="add-deliverable-form" method="post">
-            <label for="title">Deliverable Title<span class="required">*</span></label>
-            <input type="text" id="title" name="title" placeholder="Title" required />
+            <div class="form-input-container">
+                <label for="title">Deliverable Title<span class="required">*</span></label>
+                <input type="text" id="title" name="title" placeholder="Title" required />
+            </div>
 
-            <label for="assigned-date">Assigned Date<span class="required">*</span></label>
-            <input type="date" id="assigned-date" name="assigned-date" placeholder="mm/dd/yyyy" required />
+            <div class="form-input-container">
+                <label for="assigned-date">Assigned Date<span class="required">*</span></label>
+                <input type="date" id="assigned-date" name="assigned-date" placeholder="mm/dd/yyyy" required />
+            </div>
 
-            <label for="due-date">Due Date</label>
-            <input type="date" id="due-date" name="due-date" placeholder="mm/dd/yyyy" />
+            <div class="form-input-container">
+                <label for="due-date">Due Date<span class="required">*</span></label>
+                <input type="date" id="due-date" name="due-date" placeholder="mm/dd/yyyy" required />
+            </div>
 
             <!-- get subject and meeting ID (not required) -->
+            <div class="form-input-container">
+                <!-- drop down box for subjects related to current session -->
+                <label for="subject">Subject</label>
+                <select id="subject-select" name="subject">
+                    <option value="0">Select Subject</option>
+                    <!-- JS will insert relevant subjects here -->
+                </select>
+            </div>
 
-            <label for="description">Description</label>
-            <textarea id="description" name="description"></textarea>
+            <div class="form-input-container">
+                <!-- drop down box for meetings to current session and/or selected subject -->
+                <label for="meeting">Meeting</label>
+                <select id="meeting-select" name="meeting">
+                    <option value="0">Select Meeting</option>
+                    <!-- JS will insert relevant meetings here -->
+                </select>
+            </div>
+
+            <div class="form-input-container">
+                <label for="description">Description</label>
+                <textarea id="description" name="description"></textarea>
+            </div>
 
             <button type="submit">Submit</button>
         </form>
@@ -42,14 +70,15 @@
 
 <!-- Subjects Grid Container -->
 <div class="deliverable-grid-container">
-    {% for match in deliverables %}
-    {% set deliverable = match[0] %}
-    <div id="{{ deliverable.name }} card" class="deliverable-card" onclick="openDeliverable(this)">
+    {% for deliverable in deliverables %}
+    <div id="{{ deliverable.title }} card" class="deliverable-card" onclick="openDeliverable(this)">
         <h2 id="title" class="deliverable-info">{{ deliverable.title }}</h2>
         <p id="assigned-date" class="deliverable-info">Assigned Date: {{ deliverable.assigned_date.strftime('%Y-%m-%d')
             }}</p>
         <p id="due-date" class="deliverable-info">Due Date: {{ deliverable.due_date.strftime('%Y-%m-%d') }}</p>
         <!-- subject and meeting ID joins -->
+        <p id="subject" class="deliverable-info">Subject: {{ deliverable.subject }}</p>
+
         <p id="description" class="deliverable-info">Description: {{ deliverable.description }}</p>
     </div>
     {% endfor %}

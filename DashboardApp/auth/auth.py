@@ -1,5 +1,5 @@
 # DashboardApp/auth/auth.py
-from flask import Blueprint, redirect, render_template, request, url_for, session, flash
+from flask import Blueprint, redirect, render_template, request, url_for, session
 from .models.user import User
 
 auth_bp = Blueprint(

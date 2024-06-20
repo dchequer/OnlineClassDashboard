@@ -45,6 +45,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="/core/meetings">
+                        <span id="meetings-icon" class="icon">🤝</span>
+                        <span id="meetings-text" class="text">Meetings</span>
+                    </a>
+                </li>
+                <li>
                     <a href="#">
                         <span id="settings-icon" class="icon">⚙️</span>
                         <span id="settings-text" class="text">Settings</span>
@@ -52,7 +58,10 @@
                 </li>
             </ul>
         </div>
-
+        
+        <!-- placeholder for error messages -->
+        <div id="errors">{% block error %} {% endblock %}</div>
+        
         <!-- insert custom content for inherited content -->
         <div id="content">{% block content %} {% endblock %}</div>
 
