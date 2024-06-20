@@ -10,7 +10,7 @@
 /* #endregion */
 
 /* #region Meeting Grid */
-.meeetings-grid-container {
+.meeting-grid-container {
   display: grid;
   grid-template-columns: repeat(
     auto-fill,

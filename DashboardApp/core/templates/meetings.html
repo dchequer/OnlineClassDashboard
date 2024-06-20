@@ -61,9 +61,9 @@
 </div>
 
 <!-- meetings Grid Container -->
-<div class="meetings-grid-container">
+<div class="meeting-grid-container">
   {% for meeting in meetings %}
-  <div id="{{ meeting.name }} card" class="meeting-card" onclick="openmeeting(this)">
+  <div id="{{ meeting.name }} card" class="meeting-card" onclick="openMeeting(this)">
     <h2 id="name" class="meeting-info">{{ meeting.name }}</h2>
     <p id="date" class="meeting-info">Date: {{ meeting.date.strftime('%Y-%m-%d') }}</p>
     <p id="location" class="meeting-info">Location: {{ meeting.location }}</p>

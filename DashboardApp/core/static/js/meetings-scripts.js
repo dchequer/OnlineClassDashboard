@@ -68,8 +68,8 @@ window.onclick = function (event) {
 };
 
 /* - - - Cards - - - */
-// on click open specific assignment
-function openSubject(meetingCard) {
+// on click open specific meeting
+function openMeeting(meetingCard) {
   console.log(meetingCard);
   console.log(meetingCard.id);
 }

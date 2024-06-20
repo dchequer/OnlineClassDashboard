@@ -78,7 +78,7 @@
         <p id="due-date" class="deliverable-info">Due Date: {{ deliverable.due_date.strftime('%Y-%m-%d') }}</p>
         <!-- subject and meeting ID joins -->
         <p id="subject" class="deliverable-info">Subject: {{ deliverable.subject }}</p>
-
+        <p id="meeting" class="deliverable-info">Meeting: {{ deliverable.meeting }}</p>
         <p id="description" class="deliverable-info">Description: {{ deliverable.description }}</p>
     </div>
     {% endfor %}

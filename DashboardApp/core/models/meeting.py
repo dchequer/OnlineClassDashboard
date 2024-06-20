@@ -39,6 +39,9 @@ class Meeting(db.Model):
         self.location = location
         self.description = description
 
+    def __repr__(self) -> str:
+        return self.name
+
     def save(self) -> None:
         db.session.add(self)
         db.session.commit()
@@ -60,7 +63,7 @@ class Meeting(db.Model):
         }
 
     def limit_query_to_owner(owner_id: int) -> Query:
-        return Meeting.query.filter_by(id=owner_id)
+        return Meeting.query.filter_by(owner_id=owner_id)
 
     @staticmethod
     def get_meeting(owner_id: int, meeting_id: int) -> Meeting:

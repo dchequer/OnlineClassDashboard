@@ -10,6 +10,8 @@ meeting_bp = Blueprint(
 def get_meetings():
     owner_id = session["user_id"]
     meetings = Meeting.get_all_meetings(owner_id)
+    print(owner_id)
+    print(meetings)
 
     return meetings
 
