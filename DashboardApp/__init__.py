@@ -2,12 +2,14 @@
 from flask import Flask, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_login import LoginManager
 from dotenv import load_dotenv
 import os
 import config
 
 db = SQLAlchemy()
 migrate = Migrate()
+login_manager = LoginManager()
 
 
 def create_app():
@@ -28,8 +30,14 @@ def create_app():
     )
     db.init_app(app)
 
+    # 
+
     # init migration engine
     migrate.init_app(app, db)
+
+    # init login manager
+    login_manager.init_app(app)
+    #login_manager.login_view = "auth.user.login"
 
     # import models
     from DashboardApp.auth.models.user import User

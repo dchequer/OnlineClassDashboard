@@ -1,5 +1,6 @@
 # core/meeting.py
 from flask import Blueprint, redirect, render_template, request, url_for, session
+from flask_login import login_required
 from .models.meeting import Meeting
 from datetime import date
 
@@ -21,6 +22,7 @@ def extract_date(date_string):
     return assigned_date
 
 @meeting_bp.route("/meetings", methods=["GET", "POST"])
+@login_required
 def meetings():
     if request.method == "POST":
         owner_id = session["user_id"]

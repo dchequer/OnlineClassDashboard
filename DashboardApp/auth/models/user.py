@@ -38,8 +38,23 @@ class User(db.Model):
         db.session.commit()
 
     def get(self, args: str) -> list:
-        print(args)
         return [getattr(self, arg.strip()) for arg in args.split(",")]
+
+
+    # - - - Flask Login methods - - - #
+    def is_authenticated(self):
+        print("mine")
+        return True
+    
+    def is_anonymous(self):
+        return False
+    
+    def is_active(self):
+        return True
+    
+    def get_id(self):
+        return str(self.id)
+    # - - - - - - - - - - - - - - - - #
 
     @staticmethod
     def user_exists(username) -> bool:
@@ -58,9 +73,8 @@ class User(db.Model):
         if user is not None:
             return user.created_timestamp
         else:
-            print(f"No user found with id: {id}")
             return None
 
     @staticmethod
-    def get_user(id) -> User:
+    def get_user(id) -> User | None:
         return User.query.filter_by(id=id).first()

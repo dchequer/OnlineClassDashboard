@@ -1,4 +1,5 @@
 from flask import render_template, Blueprint, request, session
+from flask_login import login_required
 from .models.subject import Subject
 
 
@@ -12,6 +13,7 @@ def get_subjects():
     return subjects
 
 @subject_bp.route('/subjects', methods=['GET', 'POST'])
+@login_required
 def subjects():
     if request.method == 'POST':
         owner_id = session['user_id']

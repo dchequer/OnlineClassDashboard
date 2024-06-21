@@ -1,4 +1,5 @@
 from flask import render_template, Blueprint, request, session
+from flask_login import login_required
 from .models.subject import Subject
 from .models.deliverable import Deliverable
 from datetime import date
@@ -21,6 +22,7 @@ def extract_date(date_string):
 
 
 @deliverable_bp.route("/deliverables", methods=["GET", "POST"])
+@login_required
 def deliverables():
     if request.method == "POST":
         print(request.form)
