@@ -9,6 +9,8 @@ subject_bp = Blueprint('subject', __name__, static_folder='static', template_fol
 def get_subjects():
     owner_id = session["user_id"]
     subjects = Subject.get_all_subjects(owner_id=owner_id)
+    print(subjects)
+    print(owner_id)
 
     return subjects
 

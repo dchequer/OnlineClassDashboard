@@ -57,7 +57,7 @@ class Subject(db.Model):
         }
 
     def limit_query_to_owner(owner_id: int) -> Query:
-        return Subject.query.filter_by(id=owner_id)
+        return Subject.query.filter_by(owner_id=owner_id)
 
     @staticmethod
     def get_subject(owner_id: int, subject_id: int) -> List[Subject]:

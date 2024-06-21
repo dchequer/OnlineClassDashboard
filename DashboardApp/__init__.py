@@ -18,14 +18,14 @@ def create_app():
 
     # init app and configs
     app = Flask(__name__, static_url_path="/static", static_folder="static")
-    app.config["DEBUG"] = os.environ.get("DEBUG", False)
-    app.config["ENV"] = os.environ.get("ENV", "development")
+    #app.config["DEBUG"] = os.getenv("DEBUG", False)
+    #app.config["ENV"] = os.getenv("ENV", "development")
 
-    app.secret_key = os.environ.get("SECRET_KEY", "secret_key")
+    app.secret_key = os.getenv("SECRET_KEY", "secret_key")
 
     # init database engine
-    app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("SQLALCHEMY_DATABASE_URI")
-    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = os.environ.get(
+    app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("SQLALCHEMY_DATABASE_URI")
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = os.getenv(
         "SQLALCHEMY_TRACK_MODIFICATIONS"
     )
     db.init_app(app)
