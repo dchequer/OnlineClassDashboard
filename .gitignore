@@ -1,4 +1,5 @@
 /.venv
 /OnlineClassDashboard.code-workspace
 /__pycache__
+/instance
 /ssl
