@@ -253,3 +253,54 @@ heroku logs --tail --app school-dashboard-app
 (Replace "school-dashboard-app" with your Heroku app name)
 
 This will display the real-time logs of your Heroku app, allowing you to monitor its activity and troubleshoot any issues.
+
+## Build Using docker-compose
+For local development a SQLite db is used but each time a deployment is made the database is wiped and the data is not persistent accross deployments.
+
+A way to add the functionality for persistent data is the use of volumes, mounting, and ignoring some files.
+
+1. Create a .dockerignore and add files that are not needed for the docker image
+```
+PATH: /.dockerignore
+/.venv
+/__pycache__
+*.bat
+/instance
+```
+In this case the /instance folder containing the db is ignored, along with the venv, some cache files, and the build bat files as they are not neccessary for the docker image and only slow things down.
+
+2. Create a docker-compose.yml file
+```
+PATH: /docker-compose.yml
+version: '3.8'
+services:
+  app:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./instance:/app/instance
+    environment:
+      - PORT=5000
+      - FLASK_APP=app.py
+      - NAME=World
+volumes:
+  instance:
+```
+
+The version specifies the docker compose format to be used, in this case version 3.8. The more important section, services describes how the app is built.
+First, it instructs build the app using the dockerfile located in the current directory (.)
+Then, map local port : container port. 
+The volumes section mounts the host "./instance" to the container's "/app/instance", effectively making a link between them.
+Finally, the lines "volumes: instance:" creates a named volume, These are used to persist data between container restarts.
+
+3. Build image and container using docker-compose
+```bash
+docker-compose up --build -d
+
+```
+
+4. Stop docker container when done (if detached)
+```bash
+docker-compose down
+```

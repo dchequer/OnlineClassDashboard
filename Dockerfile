@@ -11,11 +11,12 @@ COPY . /app
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Make port 5000 available to the world outside this container
-EXPOSE 8000
+EXPOSE 5000
 
 # Define environment variable
 ENV NAME World
-
+ENV PORT 5000
+ENV FLASK_APP app.py
 
 # Run app.py when the container launches using gunicorn
 CMD gunicorn -b 0.0.0.0:$PORT app:app
