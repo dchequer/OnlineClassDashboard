@@ -20,29 +20,6 @@
   padding: 20px; /* Padding around the grid */
 }
 
-.meeting-card {
-  background-color: var(--color-secondary); /* Card background color */
-  box-shadow: 5px 15px 8px rgba(255, 255, 255, 0.1); /* Simple shadow for depth */
-  border-radius: 10px; /* Rounded corners */
-  overflow: hidden; /* Ensures content fits within the rounded corners */
-  padding: 20px; /* Padding inside the card */
-  display: flex; /* Flexbox layout for the card's content */
-  flex-direction: column; /* Stack content vertically */
-  margin-right: 25px;
-}
-
-.meeting-card h2 {
-  /* meeting title */
-  margin-top: 0;
-  color: #333;
-}
-
-.meeting-card p {
-  /* meeting info */
-  flex-grow: 1; /* Allows the paragraph to fill available space, pushing any buttons to the bottom */
-  color: var(--color-text);
-}
-
 @media (max-width: 600px) {
   .meetings-grid-container {
     grid-template-columns: repeat(
@@ -50,11 +27,5 @@
       minmax(200px, 1fr)
     ); /* Adjust column size on smaller screens */
   }
-}
-
-.meeting-card:hover{
-  transform: translate(2px, 2px);
-  transition: all .1s ease-in-out;
-  border: 5px solid var(--color-accent1);
 }
 /* #endregion meeting Grid */

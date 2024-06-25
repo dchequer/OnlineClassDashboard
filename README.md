@@ -304,3 +304,12 @@ docker-compose up --build -d
 ```bash
 docker-compose down
 ```
+
+## Using PostgreSQL 
+
+Flask_SQLalchemy is made to abstract database-specific synatx and operation so that different engines can be used with the same code
+
+1. Update SQLALCHEMY_DATABASE_URI
+```
+SQLALCHEMY_DATABASE_URI=postgresql://username:password@localhost/mydatabase'
+```

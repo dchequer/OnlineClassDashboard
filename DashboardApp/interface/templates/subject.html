@@ -1,0 +1,28 @@
+{% extends 'card.html' %}
+
+
+{% block head_extra %}
+<!-- <link rel="stylesheet" href="{{ url_for('core.static', filename='css/expanded-card.css') }}"> -->
+{% endblock %}
+
+{% block title %}{{ subject.name }}{% endblock %}
+
+{% block errors %}
+
+{% endblock errors %}
+
+{% block header %}
+<h1 id="page-title">{{ subject.name }}</h1>
+<button id="edit-card-button">Edit</button>
+<div id="close-circle" onclick="window.location.href='/core/subjects';"><span class="material-symbols-outlined">
+        cancel
+    </span></div>
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}
+
+{% block scripts %}
+<!-- <script src="{{ url_for('core.static', filename='js/expanded-card.js') }}"></script> -->
+{% endblock %}

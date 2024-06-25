@@ -43,7 +43,6 @@ class User(db.Model):
 
     # - - - Flask Login methods - - - #
     def is_authenticated(self):
-        print("mine")
         return True
     
     def is_anonymous(self):

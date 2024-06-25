@@ -47,28 +47,25 @@ def create_app():
 
     # import blueprints
     from DashboardApp.auth import auth
-
     app.register_blueprint(auth.auth_bp, url_prefix="/auth")
 
     from DashboardApp.core import core
-
     app.register_blueprint(core.core_bp, url_prefix="/core")
 
     from DashboardApp.core import deliverable
-
     app.register_blueprint(deliverable.deliverable_bp, url_prefix="/core")
 
     from DashboardApp.core import meeting
-
     app.register_blueprint(meeting.meeting_bp, url_prefix="/core")
 
     from DashboardApp.core import subject
-
     app.register_blueprint(subject.subject_bp, url_prefix="/core")
 
     from DashboardApp.api import api
-
     app.register_blueprint(api.api_bp, url_prefix="/api")
+
+    from DashboardApp.interface import interface
+    app.register_blueprint(interface.interface_bp, url_prefix="/interface")
 
     # redirect to /auth/login
     @app.route("/")

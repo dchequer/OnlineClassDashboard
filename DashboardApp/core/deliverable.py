@@ -25,7 +25,6 @@ def extract_date(date_string):
 @login_required
 def deliverables():
     if request.method == "POST":
-        print(request.form)
         owner_id = session["user_id"]
         title = request.form["title"]
         assigned_date = extract_date(request.form["assigned-date"])

@@ -2,9 +2,9 @@
 
 /* - - - SUBJECTS PAGE - - - */
 // Get modal element
-var modal = document.getElementById("add-subject-modal");
+var modal = document.getElementById("add-card-modal");
 // Get button that opens the modal
-var openModalButton = document.getElementById("add-subject-button");
+var openModalButton = document.getElementById("add-card-button");
 // Get the <span> element that closes the modal
 var closeSpan = document.getElementsByClassName("close")[0];
 // Get the button that filters cards
