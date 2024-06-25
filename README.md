@@ -17,14 +17,13 @@ To clone the repository, open your terminal and navigate to the desired director
 git clone https://github.com/dchequer/OnlineClassDashboard
 ```
 
-Replace `<repository-url>` with the actual URL of the repository.
 
 ## Create a Python 3.12 Virtual Environment
 
 Once the repository is cloned, navigate to the project directory using the terminal. To create a Python 3.12 virtual environment, run the following command:
 
 ```
-python3.12 -m venv venv
+python3 -m venv venv
 ```
 
 This will create a new directory named `venv` which will contain the virtual environment.
@@ -91,7 +90,7 @@ RUN pip install -r requirements.txt
 EXPOSE 5000
 
 # Set the command to run the gunicorn server
-CMD ["gunicorn", "-b", "0.0.0.0:5000", "app:app"]
+CMD gunicorn -b 0.0.0.0:$PORT app:app
 ```
 
 3. Save the `Dockerfile`.
@@ -116,39 +115,91 @@ docker images
 
 4. To register the Docker image, you need to create an account on a container registry platform like Docker Hub or GitHub Container Registry. Once you have an account, follow the platform-specific instructions to create a new repository and push the image to the registry.
 
+## Deploy the Docker Container Locally
+
+```bash
+docker run --name online-class-dashboard-container -d -p 5000:5000 online-class-dashboard
+```
+Replace "online-class-dashboard-container" and "online-class-dashboard" with your container and image name respectively.
+-d: detached mode, the container runs in the background (optional)
+-p: XXXX:YYYY maps host's XXXX port to container's YYYY port
+
+If container is running in detached mode:
+```bash
+docker stop online-class-dashboard-container
+```
+and optionally:
+```bash
+docker rm online-class-dashboard-container
+```
+
 ## Deploy the Docker Container on Heroku
 
 To deploy the Docker container on Heroku, follow these steps:
 
-1. Create a Heroku account if you don't have one already.
-2. Install the Heroku CLI by following the instructions on the Heroku website.
-3. Open your terminal and log in to Heroku using the following command:
+1. Set up your procfile.
+### Set up the Procfile
+
+To set up the `Procfile`, follow these steps:
+
+1.1. Create a new file in the project directory called `Procfile` (without any file extension).
+1.2 Open the `Procfile` in a text editor.
+1.3 Add the following content to the `Procfile`:
+
+```
+web: gunicorn -b 0.0.0.0:$PORT app:app
+```
+
+The `Procfile` is used to specify the commands that are executed by Heroku to run your application. In this case, we are using `gunicorn` as the web server and specifying the host and port to bind to (`0.0.0.0:$PORT`). The `app:app` part refers to the Flask application object and the name of the module where it is defined.
+
+You can customize the `gunicorn` command by adding different arguments based on your requirements. Here are some commonly used arguments:
+
+- `-b` or `--bind`: Specifies the host and port to bind to. For example, `-b 0.0.0.0:5000` binds to all network interfaces on port 5000.
+- `-w` or `--workers`: Specifies the number of worker processes to spawn. For example, `-w 4` starts 4 worker processes.
+- `--threads`: Specifies the number of threads per worker process. For example, `--threads 2` starts 2 threads per worker process.
+- `--timeout`: Specifies the maximum time (in seconds) for a worker to handle a request. For example, `--timeout 30` sets the timeout to 30 seconds.
+- `--preload`: Preloads the application code before forking worker processes. This can improve performance but may increase memory usage.
+
+You can find more information about `gunicorn` and its command-line options in the [official documentation](https://docs.gunicorn.org/en/stable/run.html).
+
+Remember to save the `Procfile` after adding the `gunicorn` command.
+
+2. Create a Heroku account if you don't have one already.
+3. Install the Heroku CLI by following the instructions on the Heroku website.
+4. Open your terminal and log in to Heroku using the following command:
 
 ```bash
 heroku login
 ```
 
-4. Navigate to the project directory in your terminal.
-5. Run the following command to create a new Heroku app:
+5. Navigate to the project directory in your terminal.
+6. Run the following command to create a new Heroku app:
 
 ```bash
 heroku create school-dashboard-app
 ```
 ("school-dashboard-app" is the heroku app name, could be changed to whatever you want, also remember it)
 
-6. Push the Docker image to Heroku's container registry using the following command:
+7. Tag the docker image you created before (create one if you haven't, see above)
+```bash
+docker tag online-class-dashboard registry.heroku.com/school-dashboard-app/web
+```
+Replace "online-class-dashboard" and "school-dashboard" with respective image name and app name if neccessary.
+
+
+8. Push the Docker image to Heroku's container registry using the following command:
 
 ```bash
-heroku container:push web --app school-dashboard-app
+docker push registry.heroku.com/school-dashboard-app/web
 ```
 
-7. Release the Docker container on Heroku using the following command:
+9. Release the Docker container on Heroku using the following command:
 
 ```bash
 heroku container:release web --app school-dashboard-app
 ```
 
-8. Your Docker container should now be deployed on Heroku. You can access it by visiting the URL provided by Heroku.
+10. Your Docker container should now be deployed on Heroku. You can access it by visiting the URL provided by Heroku.
 
 That's it! You have successfully created a Docker container for your Online Class Dashboard project, registered it on a container registry, and deployed it on Heroku.
 ## Rebuild and Release the Docker Image
