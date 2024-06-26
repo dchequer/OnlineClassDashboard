@@ -6,7 +6,7 @@
 {% endblock %}
 
 
-{% block title %}{{ deliverable.name }}{% endblock %}
+{% block title %}{{ deliverable.title }}{% endblock %}
 
 
 {% block errors %}
@@ -16,7 +16,7 @@
 
 {% block content %}
 
-<h1 id="page-title">{{ deliverable.name }}</h1>
+<h1 id="page-title">{{ deliverable.title }}</h1>
 <button id="edit-card-button">Edit</button>
 <div id="close-circle" onclick="window.location.href='/core/deliverables';">
     <span class="material-symbols-outlined">cancel</span>
