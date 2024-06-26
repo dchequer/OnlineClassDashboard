@@ -15,13 +15,13 @@
 <h1 id="page-title">Meetings</h1>
 <!-- Button to Open Modal -->
 <div id="controls">
-  <button id="add-meeting-button">Add New meeting</button>
+  <button id="add-card-button">Add New meeting</button>
   <input type="text" id="class-name-filter" placeholder="Class Name" class="filter">
   <input type="text" id="instructor-name-filter" placeholder="Instructor Name" class="filter">
   <button id="filter-meetings-button">Filter</button>
 </div>
 <!-- Modal Structure -->
-<div id="add-meeting-modal" class="modal" style="display: none;">
+<div id="add-card-modal" class="modal" style="display: none;">
   <div class="modal-content">
     <span class="close">&times;</span>
     <form id="add-meeting-form" method="post">
@@ -63,12 +63,12 @@
 <!-- meetings Grid Container -->
 <div class="meeting-grid-container">
   {% for meeting in meetings %}
-  <div id="{{ meeting.name }} card" class="meeting-card" onclick="openMeeting(this)">
-    <h2 id="name" class="meeting-info">{{ meeting.name }}</h2>
-    <p id="date" class="meeting-info">Date: {{ meeting.date.strftime('%Y-%m-%d') }}</p>
-    <p id="location" class="meeting-info">Location: {{ meeting.location }}</p>
-    <p id="subject" class="meeting-info">Subject: {{ meeting.subject }}</p>
-    <p id="description" class="meeting-info">Description: {{ meeting.description }}</p>
+  <div id="{{ meeting.name }} card" class="card-container" onclick="openMeeting(this)">
+    <h2 id="name" class="card-title">{{ meeting.name }}</h2>
+    <p id="date" class="card-info">Date: {{ meeting.date.strftime('%Y-%m-%d') }}</p>
+    <p id="location" class="card-info">Location: {{ meeting.location }}</p>
+    <p id="subject" class="card-info">Subject: {{ meeting.subject }}</p>
+    <p id="description" class="card-info">Description: {{ meeting.description }}</p>
   </div>
   {% endfor %}
 </div>

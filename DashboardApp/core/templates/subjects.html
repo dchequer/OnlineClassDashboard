@@ -15,16 +15,16 @@
 <h1 id="page-title">Subjects</h1>
 <!-- Button to Open Modal -->
 <div id="controls">
-  <button id="add-subject-button">Add New Subject</button>
+  <button id="add-card-button">Add New Subject</button>
   <input type="text" id="class-name-filter" placeholder="Class Name" class="filter">
   <input type="text" id="instructor-name-filter" placeholder="Instructor Name" class="filter">
   <button id="filter-subjects-button">Filter</button>
 </div>
 <!-- Modal Structure -->
-<div id="add-subject-modal" class="modal" style="display: none;">
+<div id="add-card-modal" class="modal" style="display: none;">
   <div class="modal-content">
     <span class="close">&times;</span>
-    <form id="add-subject-form" method="post">
+    <form id="add-card-form" method="post">
       <div class="form-input-container">
         <label for="name">Subject Name <span class="required">*</span></label>
         <input type="text" id="name" name="name" placeholder="Name" required />
@@ -58,12 +58,12 @@
 <!-- Subjects Grid Container -->
 <div class="subjects-grid-container">
   {% for subject in subjects %}
-  <div id="{{ subject.name }} card" class="subject-card" onclick="openSubject(this)">
-    <h2 id="name" class="subject-info">{{ subject.name }}</h2>
-    <p id="code" class="subject-info">Code: {{ subject.code }}</p>
-    <p id="instructor" class="subject-info">Instructor: {{ subject.instructor }}</p>
-    <p id="contact-info" class="subject-info">Contact Info: {{ subject.contact_info }}</p>
-    <p id="description" class="subject-info">Description: {{ subject.description }}</p>
+  <div id="{{ subject.name }} card" class="card-container" onclick="openCard(this)">
+    <h2 id="name" class="card-title">{{ subject.name }}</h2>
+    <p id="code" class="card-info">Code: {{ subject.code }}</p>
+    <p id="instructor" class="card-info">Instructor: {{ subject.instructor }}</p>
+    <p id="contact-info" class="card-info">Contact Info: {{ subject.contact_info }}</p>
+    <p id="description" class="card-info">Description: {{ subject.description }}</p>
   </div>
   {% endfor %}
 </div>

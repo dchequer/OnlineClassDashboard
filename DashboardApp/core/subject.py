@@ -1,4 +1,4 @@
-from flask import render_template, Blueprint, request, session
+from flask import render_template, Blueprint, request, session, redirect, url_for
 from flask_login import login_required
 from .models.subject import Subject
 
@@ -9,8 +9,6 @@ subject_bp = Blueprint('subject', __name__, static_folder='static', template_fol
 def get_subjects():
     owner_id = session["user_id"]
     subjects = Subject.get_all_subjects(owner_id=owner_id)
-    print(subjects)
-    print(owner_id)
 
     return subjects
 
@@ -37,3 +35,7 @@ def subjects():
 
     return render_template('subjects.html', subjects=get_subjects())
 
+@subject_bp.route('/subjects/<string:subject_name>', methods=['GET'])
+@login_required
+def subject(subject_name):
+    return redirect(url_for("interface.subject", subject_name=subject_name))
