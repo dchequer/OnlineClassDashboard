@@ -3,6 +3,7 @@ from flask_login import login_required
 from .models.subject import Subject
 from .models.deliverable import Deliverable
 from datetime import date
+from typing import List
 
 
 deliverable_bp = Blueprint("deliverable", __name__, static_folder="static", template_folder="templates")
@@ -23,6 +24,7 @@ def extract_date(date_string):
 @deliverable_bp.route("/deliverables", methods=["GET", "POST"])
 @login_required
 def deliverables():
+    errors: List[str] = []
     if request.method == "POST":
         owner_id = session["user_id"]
         title = request.form["title"]
@@ -49,10 +51,9 @@ def deliverables():
             deliverable.save()
         else:
             print("Deliverable already exists")
-            return render_template("deliverables.html", error="Deliverable already exists")
+            errors.append("Deliverable already exists")
 
-    deliverables = get_deliverables()
-    return render_template("deliverables.html", deliverables=deliverables)
+    return render_template("deliverables.html", deliverables=get_deliverables(), errors=errors)
 
 
 @deliverable_bp.route("/deliverables/<string:deliverable_title>", methods=["GET"])

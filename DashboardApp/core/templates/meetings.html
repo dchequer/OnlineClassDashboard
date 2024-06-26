@@ -8,8 +8,12 @@
 {% block title %}Meetings{% endblock %}
 
 {% block errors %}
-
-{% endblock errors %}
+{% if errors %}
+  {% for error in errors %}
+    <p>⚠️{{ error }}</p>
+  {% endfor %}
+{% endif %}
+{% endblock %}
 
 {% block content %}
 <h1 id="page-title">Meetings</h1>

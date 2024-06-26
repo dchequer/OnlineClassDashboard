@@ -59,12 +59,13 @@
             </ul>
         </div>
         
-        <!-- placeholder for error messages -->
-        <div id="errors">{% block error %} {% endblock %}</div>
-        
-        <!-- insert custom content for inherited content -->
-        <div id="content">{% block content %} {% endblock %}</div>
-
+        <div id="right-side">
+            <!-- placeholder for error messages -->
+            <div id="errors"><div id="progress-bar"></div> {% block errors %} {% endblock %}</div>
+            
+            <!-- insert custom content for inherited content -->
+            <div id="content">{% block content %} {% endblock %}</div>
+        </div>
         <!-- include global scripts -->
         <script src="{{ url_for('static', filename='global-scripts.js') }}"></script>
 

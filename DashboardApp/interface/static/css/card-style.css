@@ -12,6 +12,11 @@
   align-items: center;
 }
 
+#close-circle:hover {
+  transform: scale(1.05);
+  animation: ease .5s;
+}
+
 .material-symbols-outlined {
   font-size: 1.5rem;
   color: var(--color-text);

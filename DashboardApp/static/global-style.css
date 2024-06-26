@@ -51,6 +51,12 @@ body {
   height: 100vh;
   transition: margin-left 0.5s ease;
 }
+#right-side {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+}
 
 /* #endregion Page Container */
 
@@ -70,7 +76,7 @@ body {
   justify-content: center;
   text-align: center; /* Center-align the text within the links */
   /* Ensure the sidebar has a defined height if it's not already full-screen or of a specific size */
-  height: 100vh; /* Example: full viewport height */
+  height: 100vh; 
 }
 
 .sidebar a {
@@ -79,7 +85,7 @@ body {
   justify-content: center;
   text-decoration: none;
   font-size: 25px;
-  color: var(--color-text); /* Assuming you have a color variable for text */
+  color: var(--color-text); 
   width: 100%; /* Make link width same as sidebar */
   padding: 10px 0; /* Add some padding for spacing, adjust as needed */
 }
@@ -96,6 +102,8 @@ body {
 
 .sidebar a:hover {
   color: var(--color-accent1);
+  transform: scale(1.05);
+  animation: ease .5s;
 }
 
 .sidebar .icon {
@@ -121,6 +129,31 @@ body {
   display: inline-flex; /* Show text when expanded */
 }
 /* #endregion Sidebar */
+
+/* #region Errors */
+#errors {
+  width: calc(100vw - 90px);
+  color: red;
+  font-weight: bold;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid red;
+  border-radius: 5px;
+  background-color: rgba(255, 0, 0, 0.1);
+  display: none;
+  transition: all 0.5s ease;
+}
+#errors.expanded{
+  width: calc(100vw - 300px);
+}
+
+#errors #progress-bar {
+  width: 0;
+  height: 5px;
+  background-color: red;
+  transition: width ease;
+}
+/* #endregion Errors */
 
 /* #region New Card Modal */
 /* Modal Styles */

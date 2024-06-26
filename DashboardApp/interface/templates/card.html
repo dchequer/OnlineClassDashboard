@@ -70,6 +70,7 @@
         <div id="content">{% block content %} {% endblock %}</div>
 
         <!-- include global scripts -->
+         <script src="{{ url_for('static', filename='global-scripts.js') }}"></script>
         <script src="{{ url_for('interface.static', filename='js/card-scripts.js') }}"></script>
 
         <!-- include custom script -->
