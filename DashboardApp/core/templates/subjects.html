@@ -29,7 +29,7 @@
         <label for="name">Subject Name <span class="required">*</span></label>
         <input type="text" id="name" name="name" placeholder="Name" required />
       </div>
-      
+
       <div class="form-input-container">
         <label for="code">Subject Code <span class="required">*</span></label>
         <input type="text" id="code" name="code" placeholder="CLS101" required />
@@ -58,7 +58,7 @@
 <!-- Subjects Grid Container -->
 <div class="subjects-grid-container">
   {% for subject in subjects %}
-  <div id="{{ subject.name }} card" class="card-container" onclick="openCard(this)">
+  <div id="{{ subject.name }}-card" class="card-container" onclick="openCard(this)" data-subject-id="{{ subject.id }}">
     <h2 id="name" class="card-title">{{ subject.name }}</h2>
     <p id="code" class="card-info">Code: {{ subject.code }}</p>
     <p id="instructor" class="card-info">Instructor: {{ subject.instructor }}</p>

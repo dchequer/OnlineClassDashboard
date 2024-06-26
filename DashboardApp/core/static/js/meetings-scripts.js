@@ -67,12 +67,6 @@ window.onclick = function (event) {
   }
 };
 
-/* - - - Cards - - - */
-// on click open specific meeting
-function openMeeting(meetingCard) {
-  console.log(meetingCard);
-  console.log(meetingCard.id);
-}
 
 /* - - - MISC - - - */
 // when page loads populate the dropdown

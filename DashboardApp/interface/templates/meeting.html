@@ -1,0 +1,64 @@
+{% extends 'card.html' %}
+
+
+{% block head_extra %}
+
+{% endblock %}
+
+
+{% block title %}{{ meeting.name }}{% endblock %}
+
+
+{% block errors %}
+
+{% endblock errors %}
+
+
+{% block content %}
+
+<h1 id="page-title">{{ meeting.name }}</h1>
+<button id="edit-card-button">Edit</button>
+<div id="close-circle" onclick="window.location.href='/core/meetings';">
+    <span class="material-symbols-outlined">cancel</span>
+</div>
+
+
+<div class="card-section">
+    <h2>Meeting Information</h2>
+    <div class="card-section-content">
+        <p><strong>Meeting Name:</strong> {{ meeting.name }}</p>
+        <p><strong>Meeting Subject:</strong> {{ meeting.subject_name }}</p>
+        <p><strong>Meeting Description:</strong> {{ meeting.description }}</p>
+    </div>
+</div>
+<div class="card-section">
+    <h2>Meeting Details</h2>
+    <div class="card-section-content">
+        <p><strong>Meeting Date:</strong> {{ meeting.date.strftime("%Y-%m-%d") }}</p>
+        <p><strong>Meeting Location:</strong> {{ meeting.location }}</p>
+    </div>
+</div>
+<div class="card-section">
+    <h2>Meeting Content</h2>
+    <div class="card-section-content">
+        {% if meeting.deliverables %}
+        <div class="card-section">
+            <div class="card-section-content">
+                <p><strong>Deliverables:</strong></p>
+                <ul>
+                    {% for deliverable in meeting.deliverables %}
+                    <li>{{ deliverable }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}

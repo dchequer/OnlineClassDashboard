@@ -3,7 +3,7 @@ from flask_login import login_required
 from .models.subject import Subject
 
 
-subject_bp = Blueprint('subject', __name__, static_folder='static', template_folder='templates')
+subject_bp = Blueprint("subject", __name__, static_folder="static", template_folder="templates")
 
 
 def get_subjects():
@@ -12,16 +12,17 @@ def get_subjects():
 
     return subjects
 
-@subject_bp.route('/subjects', methods=['GET', 'POST'])
+
+@subject_bp.route("/subjects", methods=["GET", "POST"])
 @login_required
 def subjects():
-    if request.method == 'POST':
-        owner_id = session['user_id']
-        subject_name = request.form['name']
-        subject_code = request.form['code']
-        instructor = request.form['instructor']
-        contact_info = request.form['contact-info']
-        description = request.form['description']
+    if request.method == "POST":
+        owner_id = session["user_id"]
+        subject_name = request.form["name"]
+        subject_code = request.form["code"]
+        instructor = request.form["instructor"]
+        contact_info = request.form["contact-info"]
+        description = request.form["description"]
 
         print(f"Received new subject request: {owner_id=}, {subject_name=}, {subject_code=}, {instructor=}, {contact_info=}, {description=}")
         print("Checking if subject already exists...")
@@ -31,11 +32,12 @@ def subjects():
             subject.save()
         else:
             print("Subject already exists")
-            return render_template('subjects.html', error="Subject already exists")
+            return render_template("subjects.html", error="Subject already exists")
 
-    return render_template('subjects.html', subjects=get_subjects())
+    return render_template("subjects.html", subjects=get_subjects())
 
-@subject_bp.route('/subjects/<string:subject_name>', methods=['GET'])
+
+@subject_bp.route("/subjects/<string:subject_name>", methods=["GET"])
 @login_required
-def subject(subject_name):
+def subject(subject_name: str):
     return redirect(url_for("interface.subject", subject_name=subject_name))

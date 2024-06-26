@@ -25,35 +25,35 @@
   <div class="modal-content">
     <span class="close">&times;</span>
     <form id="add-meeting-form" method="post">
-        <div class="form-input-container">
-            <label for="name">Name<span class="required">*</span></label>
-            <input type="text" id="name" name="name" placeholder="Name" required />
-        </div>
+      <div class="form-input-container">
+        <label for="name">Name<span class="required">*</span></label>
+        <input type="text" id="name" name="name" placeholder="Name" required />
+      </div>
 
-        <div class="form-input-container">
-            <label for="date">Date<span class="required">*</span></label>
-            <input type="date" id="date" name="date" placeholder="mm/dd/yyyy" required />
-        </div>
+      <div class="form-input-container">
+        <label for="date">Date<span class="required">*</span></label>
+        <input type="date" id="date" name="date" placeholder="mm/dd/yyyy" required />
+      </div>
 
-        <div class="form-input-container">
-            <label for="location">Location</label>
-            <input type="text" id="location" name="location" placeholder="Location"/>
-        </div>
+      <div class="form-input-container">
+        <label for="location">Location</label>
+        <input type="text" id="location" name="location" placeholder="Location" />
+      </div>
 
-        <!-- get subject ID  -->
-        <div class="form-input-container">
-            <!-- drop down box for subjects related to current session -->
-            <label for="subject">Subject<span class="required">*</span></label>
-            <select id="subject-select" name="subject" required>
-                <option value="0">Select Subject</option>
-                <!-- JS will insert relevant subjects here -->
-            </select>
-        </div>
+      <!-- get subject ID  -->
+      <div class="form-input-container">
+        <!-- drop down box for subjects related to current session -->
+        <label for="subject">Subject<span class="required">*</span></label>
+        <select id="subject-select" name="subject" required>
+          <option value="0">Select Subject</option>
+          <!-- JS will insert relevant subjects here -->
+        </select>
+      </div>
 
-        <div class="form-input-container">
-            <label for="description">Description</label>
-            <textarea id="description" name="description"></textarea>
-        </div>
+      <div class="form-input-container">
+        <label for="description">Description</label>
+        <textarea id="description" name="description"></textarea>
+      </div>
 
       <button type="submit">Submit</button>
     </form>
@@ -63,7 +63,7 @@
 <!-- meetings Grid Container -->
 <div class="meeting-grid-container">
   {% for meeting in meetings %}
-  <div id="{{ meeting.name }} card" class="card-container" onclick="openMeeting(this)">
+  <div id="{{ meeting.name }}-card" class="card-container" onclick="openCard(this)" data-meeting-id:"{{ meeting.id }}">
     <h2 id="name" class="card-title">{{ meeting.name }}</h2>
     <p id="date" class="card-info">Date: {{ meeting.date.strftime('%Y-%m-%d') }}</p>
     <p id="location" class="card-info">Location: {{ meeting.location }}</p>

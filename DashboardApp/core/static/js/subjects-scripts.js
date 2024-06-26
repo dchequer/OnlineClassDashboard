@@ -28,10 +28,3 @@ window.onclick = function (event) {
     modal.style.display = "none";
   }
 };
-
-/* Cards */
-// on click open specific assignment
-function openSubject(subjectCard) {
-  console.log(subjectCard);
-  console.log(subjectCard.id);
-}

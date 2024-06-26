@@ -82,11 +82,6 @@ function populateMeetingDropdown(USER_ID) {
     });
 }
 
-/* - - - Cards - - - */
-// on click open specific assignment
-function openDeliverable(deliverableCard) {
-  console.log(deliverableCard.id);
-}
 
 /* - - - MISC - - -*/
 // when page loads populate the dropdown

@@ -20,6 +20,12 @@
   --color-text: #ffffff; /* Assuming light text for dark background */
   --color-border: #d9d9d9; /* A neutral border color */
   --color-text-accent: #3f3f3f; /* An accent color for text */
+
+  --color1: #550527;
+  --color2: #688e26;
+  --color3: #faa613;
+  --color4: #f44708;
+  --color5: #a10702;
 }
 html,
 body {
@@ -199,10 +205,9 @@ body {
   color: var(--color-text);
 }
 
-.card-container:hover{
+.card-container:hover {
   transform: scale(1.05); /* Scale up the card 5% on hover */
-  transition: transform .3s ease;
+  transition: transform 0.3s ease;
   border: 5px solid var(--color-secondary-accent2);
 }
 /* #endregion Card Container */
-

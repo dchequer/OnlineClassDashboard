@@ -2,27 +2,76 @@
 
 
 {% block head_extra %}
-<!-- <link rel="stylesheet" href="{{ url_for('core.static', filename='css/expanded-card.css') }}"> -->
+
 {% endblock %}
 
+
 {% block title %}{{ subject.name }}{% endblock %}
+
 
 {% block errors %}
 
 {% endblock errors %}
 
-{% block header %}
-<h1 id="page-title">{{ subject.name }}</h1>
-<button id="edit-card-button">Edit</button>
-<div id="close-circle" onclick="window.location.href='/core/subjects';"><span class="material-symbols-outlined">
-        cancel
-    </span></div>
-{% endblock %}
 
 {% block content %}
+
+<h1 id="page-title">{{ subject.code }}</h1>
+<button id="edit-card-button">Edit</button>
+<div id="close-circle" onclick="window.location.href='/core/subjects';">
+    <span class="material-symbols-outlined">cancel</span>
+</div>
+
+
+<div class="card-section">
+    <h2>Subject Information</h2>
+    <div class="card-section-content">
+        <p><strong>Subject Name:</strong> {{ subject.name }}</p>
+        <p><strong>Subject Code:</strong> {{ subject.code }}</p>
+        <p><strong>Subject Description:</strong> {{ subject.description }}</p>
+    </div>
+</div>
+<div class="card-section">
+    <h2>Instructor Information</h2>
+    <div class="card-section-content">
+        <p><strong>Instructor Name:</strong> {{ subject.instructor }}</p>
+        <p><strong>Instructor Contact:</strong> {{ subject.contact_info }}</p>
+    </div>
+</div>
+<div class="card-section">
+    <h2>Subject Content</h2>
+    <div class="card-section-content">
+
+        {% if subject.meetings %}
+        <div class="card-section">
+            <div class="card-section-content">
+                <p><strong>Meetings:</strong></p>
+                <ul>
+                    {% for meeting in subject.meetings %}
+                    <li>{{ meeting }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+        {% if subject.deliverables %}
+        <div class="card-section">
+            <div class="card-section-content">
+                <p><strong>Deliverables:</strong></p>
+                <ul>
+                    {% for deliverable in subject.deliverables %}
+                    <li>{{ deliverable }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
 
 {% endblock %}
 
 {% block scripts %}
-<!-- <script src="{{ url_for('core.static', filename='js/expanded-card.js') }}"></script> -->
+
 {% endblock %}

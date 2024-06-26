@@ -71,7 +71,8 @@
 <!-- Subjects Grid Container -->
 <div class="deliverable-grid-container">
     {% for deliverable in deliverables %}
-    <div id="{{ deliverable.title }} card" class="card-container" onclick="openDeliverable(this)">
+    <div id="{{ deliverable.title }}-card" class="card-container" onclick="openCard(this)"
+        data-deliverable-id="{{ deliverable.id }}">
         <h2 id="title" class="card-title">{{ deliverable.title }}</h2>
         <p id="assigned-date" class="card-info">Assigned Date: {{ deliverable.assigned_date.strftime('%Y-%m-%d')
             }}</p>
