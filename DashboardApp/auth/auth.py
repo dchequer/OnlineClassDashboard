@@ -73,7 +73,7 @@ def signup():
                 new_user.save()
 
                 create_session(new_user)
-                login_user(user, remember=True)
+                login_user(new_user, remember=True)
 
                 return redirect(url_for("core.home"))
 
