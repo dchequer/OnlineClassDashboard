@@ -272,7 +272,6 @@ In this case the /instance folder containing the db is ignored, along with the v
 2. Create a docker-compose.yml file
 ```
 PATH: /docker-compose.yml
-version: '3.8'
 services:
   app:
     build: .
@@ -288,11 +287,10 @@ volumes:
   instance:
 ```
 
-The version specifies the docker compose format to be used, in this case version 3.8. The more important section, services describes how the app is built.
-First, it instructs build the app using the dockerfile located in the current directory (.)
-Then, map local port : container port. 
-The volumes section mounts the host "./instance" to the container's "/app/instance", effectively making a link between them.
-Finally, the lines "volumes: instance:" creates a named volume, These are used to persist data between container restarts.
+First, it instructs build the app using the dockerfile located in the current directory (.)  
+Then, map local port : container port.   
+The volumes section mounts the host "./instance" to the container's "/app/instance", effectively making a link between them.  
+Finally, the lines "volumes: instance:" creates a named volume, These are used to persist data between container restarts.  
 
 3. Build image and container using docker-compose
 ```bash
@@ -303,4 +301,48 @@ docker-compose up --build -d
 4. Stop docker container when done (if detached)
 ```bash
 docker-compose down
+```
+stop - stops the containers  
+down - stops and removes the containers  
+--volumes - removes the volumes
+
+## Using PostgreSQL 
+
+Flask_SQLalchemy is made to abstract database-specific synatx and operation so that different engines can be used with the same code
+
+1. Update SQLALCHEMY_DATABASE_URI
+```
+SQLALCHEMY_DATABASE_URI=postgresql://username:password@localhost/mydatabase'
+```
+This is only a local database for development
+In order to use a PostgreSQL in production (heroku) add an add-on for Heroku PostgreSQL.
+
+2. Environment Variable  
+Heroku will create an environment variable for the database URL called "DATABASE_URL".
+Here is a sample of how to deal with it:
+```python
+# attempt to read heroku database url
+  database_url: str = os.getenv("DATABASE_URL")
+  if database_url and database_url.startswith("postgres://"):
+    # replace postgres with postgresql
+    database_url = database_url.replace("postgres://", "postgresql://", 1)
+```
+The replace function is due to Heroku setting the URL using "postgres://" while Flask-SQlalchemy expects "postrgresql://"
+
+3. Build and Deploy to Heroku  
+Only the app image is needed, no database image as Heroku will handle that.
+
+### Optional
+To build and deploy app using PostgreSQL locally, you must build an image for the app and another for the database. This can be done using networks to allow the containers to communicate to each other or using docker-compose.  
+Take a look at the examples in this repo.
+
+## Billing in Heroku
+To stop heroku app, scale down dynos to 0 using this command:
+```bash
+heroku ps:scale web=0 -a your-app-name
+```
+
+To start it back up:
+```bash
+heroku ps:scale web=1 -a your-app-name
 ```

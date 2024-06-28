@@ -1,33 +1,8 @@
 /* DashboardApp/auth/static/auth-style.css */
 
-:root {
-  /* Background Color */
-  --color-background: #1e1e1e;
-
-  /* Primary Palette */
-  --color-primary: #b91717;
-
-  /* Secondary Palette */
-  --color-secondary: #8d89a6;
-
-  /* Accent Colors */
-  --color-accent1: #d9d9d9;
-  --color-accent2: #ffffff;
-
-  /* Neutrals (Optional, adjust as needed) */
-  --color-text: #ffffff; /* Assuming light text for dark background */
-  --color-border: #d9d9d9; /* A neutral border color */
-}
-
 html,
 body {
-  height: 100%;
-  margin: 0;
-  overflow: hidden;
-  position: relative;
-  font-family: MuseoModerno;
-  background-color: var(--color-background);
-  color: var(--color-text);
+  display: block;
 }
 
 #background {

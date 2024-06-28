@@ -66,8 +66,8 @@ class Meeting(db.Model):
         return Meeting.query.filter_by(owner_id=owner_id)
 
     @staticmethod
-    def get_meeting(owner_id: int, meeting_id: int) -> Meeting:
-        return Meeting.limit_query_to_owner(owner_id).filter_by(id=meeting_id)
+    def get_meeting(owner_id: int, id: int) -> Meeting:
+        return Meeting.limit_query_to_owner(owner_id).filter_by(id=id).first()
 
     @staticmethod
     def get_all_meetings(owner_id: int) -> List[Meeting]:
@@ -75,22 +75,19 @@ class Meeting(db.Model):
 
     @staticmethod
     def meeting_exists(owner_id: int, name: str) -> bool:
-        return (
-            Meeting.limit_query_to_owner(owner_id).filter_by(name=name).first()
-            is not None
-        )
+        return Meeting.limit_query_to_owner(owner_id).filter_by(name=name).first() is not None
+
+    @staticmethod
+    def get_meeting_by_id(owner_id: int, id: int) -> Meeting:
+        return Meeting.limit_query_to_owner(owner_id).filter_by(id=id).first()
+
+    @staticmethod
+    def get_meeting_by_name(owner_id: int, name: str) -> Meeting:
+        return Meeting.limit_query_to_owner(owner_id).filter_by(name=name).first()
 
     @staticmethod
     def get_meetings_by_subject(owner_id: int, subject_id: int) -> List[Meeting]:
-        return (
-            Meeting.limit_query_to_owner(owner_id)
-            .filter_by(subject_id=subject_id)
-            .all()
-        )
-
-    @staticmethod
-    def get_meetings_by_name(owner_id: int, name: str) -> List[Meeting]:
-        return Meeting.limit_query_to_owner(owner_id).filter_by(name=name)
+        return Meeting.limit_query_to_owner(owner_id).filter_by(subject_id=subject_id).all()
 
     @staticmethod
     def get_meetings_by_date(owner_id: int, date: datetime) -> List[Meeting]:
@@ -102,18 +99,8 @@ class Meeting(db.Model):
 
     @staticmethod
     def get_meetings_by_description(owner_id: int, description: str) -> List[Meeting]:
-        return (
-            Meeting.limit_query_to_owner(owner_id)
-            .filter_by(description=description)
-            .all()
-        )
+        return Meeting.limit_query_to_owner(owner_id).filter_by(description=description).all()
 
     @staticmethod
-    def get_meetings_by_subject_and_date(
-        owner_id: int, subject_id: int, date: datetime
-    ) -> List[Meeting]:
-        return (
-            Meeting.limit_query_to_owner(owner_id)
-            .filter_by(subject_id=subject_id, date=date)
-            .all()
-        )
+    def get_meetings_by_subject_and_date(owner_id: int, subject_id: int, date: datetime) -> List[Meeting]:
+        return Meeting.limit_query_to_owner(owner_id).filter_by(subject_id=subject_id, date=date).all()

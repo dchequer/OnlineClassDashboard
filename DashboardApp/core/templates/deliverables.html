@@ -8,19 +8,23 @@
 {% block title %}Home Page{% endblock %}
 
 {% block errors %}
-
-{% endblock errors %}
+{% if errors %}
+  {% for error in errors %}
+    <p>⚠️{{ error }}</p>
+  {% endfor %}
+{% endif %}
+{% endblock %}
 
 {% block content %}
 <h1 id="page-title">Deliverables</h1>
 <!-- Button to Open Modal -->
 <div id="controls">
-    <button id="add-deliverable-button">Add New Deliverable</button>
+    <button id="add-card-button">Add New Deliverable</button>
 
     <button id="filter-deliverables-button">Filter</button>
 </div>
 <!-- Modal Structure -->
-<div id="add-deliverable-modal" class="modal" style="display: none;">
+<div id="add-card-modal" class="modal" style="display: none;">
     <div class="modal-content">
         <span class="close">&times;</span>
         <form id="add-deliverable-form" method="post">
@@ -71,15 +75,15 @@
 <!-- Subjects Grid Container -->
 <div class="deliverable-grid-container">
     {% for deliverable in deliverables %}
-    <div id="{{ deliverable.title }} card" class="deliverable-card" onclick="openDeliverable(this)">
-        <h2 id="title" class="deliverable-info">{{ deliverable.title }}</h2>
-        <p id="assigned-date" class="deliverable-info">Assigned Date: {{ deliverable.assigned_date.strftime('%Y-%m-%d')
+    <div id="{{ deliverable.title }}-card" class="card-container" onclick="openCard(this)"
+        data-deliverable-id="{{ deliverable.id }}">
+        <h2 id="title" class="card-title">{{ deliverable.title }}</h2>
+        <p id="assigned-date" class="card-info">Assigned Date: {{ deliverable.assigned_date.strftime('%Y-%m-%d')
             }}</p>
-        <p id="due-date" class="deliverable-info">Due Date: {{ deliverable.due_date.strftime('%Y-%m-%d') }}</p>
-        <!-- subject and meeting ID joins -->
-        <p id="subject" class="deliverable-info">Subject: {{ deliverable.subject }}</p>
-        <p id="meeting" class="deliverable-info">Meeting: {{ deliverable.meeting }}</p>
-        <p id="description" class="deliverable-info">Description: {{ deliverable.description }}</p>
+        <p id="due-date" class="card-info">Due Date: {{ deliverable.due_date.strftime('%Y-%m-%d') }}</p>
+        <p id="subject" class="card-info">Subject: {{ deliverable.subject }}</p>
+        <p id="meeting" class="card-info">Meeting: {{ deliverable.meeting }}</p>
+        <p id="description" class="card-info">Description: {{ deliverable.description }}</p>
     </div>
     {% endfor %}
 </div>

@@ -1,0 +1,67 @@
+{% extends 'card.html' %}
+
+
+{% block head_extra %}
+
+{% endblock %}
+
+
+{% block title %}{{ deliverable.title }}{% endblock %}
+
+
+{% block errors %}
+
+{% endblock errors %}
+
+
+{% block content %}
+
+<h1 id="page-title">{{ deliverable.title }}</h1>
+<button id="edit-card-button">Edit</button>
+<div id="close-circle" onclick="window.location.href='/core/deliverables';">
+    <span class="material-symbols-outlined">cancel</span>
+</div>
+
+
+<div class="card-section">
+    <h2>Deliverable Information</h2>
+    <div class="card-section-content">
+        <p><strong>Deliverable Title:</strong> {{ deliverable.title }}</p>
+        <p><strong>Deliverable Subject:</strong> {{ deliverable.subject_name }}</p>
+        <p><strong>Deliverable Meeting:</strong> {{ deliverable.meeting_name }}</p>
+        <p><strong>Deliverable Description:</strong> {{ deliverable.description }}</p>
+    </div>
+</div>
+<div class="card-section">
+    <h2>Deliverable Details</h2>
+    <div class="card-section-content">
+        <p><strong>Deliverable Assigned Date:</strong> {{ deliverable.assigned_date.strftime("%Y-%m-%d") }}</p>
+        <p><strong>Deliverable Due Date:</strong> {{ deliverable.due_date.strftime("%Y-%m-%d") }}</p>
+        <p><strong>Deliverable Status:</strong> {{ deliverable.status }}</p>
+        <p><strong>Deliverable Grade:</strong> {{ deliverable.grade }}</p>
+    </div>
+</div>
+<div class="card-section">
+    <h2>Deliverable Content</h2>
+    <div class="card-section-content">
+        <!-- {% if deliverable.attachments %}
+        <div class="card-section">
+            <div class="card-section-content">
+                <p><strong>Attachments:</strong></p>
+                <ul>
+                    {% for attachment in deliverable.attachments %}
+                    <li>{{ attachment }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% endif %} -->
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}

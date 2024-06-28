@@ -7,15 +7,25 @@
   --color-primary: #b91717;
 
   /* Secondary Palette */
-  --color-secondary: #8d89a6;
+  --color-secondary: #fb9c76;
 
   /* Accent Colors */
   --color-accent1: #d9d9d9;
   --color-accent2: #ffffff;
 
+  --color-secondary-accent1: #ff6200;
+  --color-secondary-accent2: #ff9a00;
+
   /* Neutrals (Optional, adjust as needed) */
   --color-text: #ffffff; /* Assuming light text for dark background */
   --color-border: #d9d9d9; /* A neutral border color */
+  --color-text-accent: #3f3f3f; /* An accent color for text */
+
+  --color1: #550527;
+  --color2: #688e26;
+  --color3: #faa613;
+  --color4: #f44708;
+  --color5: #a10702;
 }
 html,
 body {
@@ -41,6 +51,12 @@ body {
   height: 100vh;
   transition: margin-left 0.5s ease;
 }
+#right-side {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+}
 
 /* #endregion Page Container */
 
@@ -60,7 +76,7 @@ body {
   justify-content: center;
   text-align: center; /* Center-align the text within the links */
   /* Ensure the sidebar has a defined height if it's not already full-screen or of a specific size */
-  height: 100vh; /* Example: full viewport height */
+  height: 100vh; 
 }
 
 .sidebar a {
@@ -69,7 +85,7 @@ body {
   justify-content: center;
   text-decoration: none;
   font-size: 25px;
-  color: var(--color-text); /* Assuming you have a color variable for text */
+  color: var(--color-text); 
   width: 100%; /* Make link width same as sidebar */
   padding: 10px 0; /* Add some padding for spacing, adjust as needed */
 }
@@ -86,6 +102,8 @@ body {
 
 .sidebar a:hover {
   color: var(--color-accent1);
+  transform: scale(1.05);
+  animation: ease .5s;
 }
 
 .sidebar .icon {
@@ -112,7 +130,32 @@ body {
 }
 /* #endregion Sidebar */
 
-/* #region New Meeting Modal */
+/* #region Errors */
+#errors {
+  width: calc(100vw - 90px);
+  color: red;
+  font-weight: bold;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid red;
+  border-radius: 5px;
+  background-color: rgba(255, 0, 0, 0.1);
+  display: none;
+  transition: all 0.5s ease;
+}
+#errors.expanded{
+  width: calc(100vw - 300px);
+}
+
+#errors #progress-bar {
+  width: 0;
+  height: 5px;
+  background-color: red;
+  transition: width ease;
+}
+/* #endregion Errors */
+
+/* #region New Card Modal */
 /* Modal Styles */
 .modal {
   display: none; /* Hidden by default */
@@ -157,7 +200,7 @@ body {
 .form-input-container {
   display: inline-block;
 }
-/* #endregion New Meeting Modal */
+/* #endregion New Card Modal */
 
 /* #region Main Content */
 #content {
@@ -169,3 +212,35 @@ body {
 }
 
 /* #endregion Main Content */
+
+/* #region Card Container */
+.card-container {
+  background-color: var(--color-secondary); /* Card background color */
+  box-shadow: 5px 15px 8px rgba(255, 255, 255, 0.1); /* Simple shadow for depth */
+  border-radius: 10px; /* Rounded corners */
+  overflow: hidden; /* Ensures content fits within the rounded corners */
+  padding: 20px; /* Padding inside the card */
+  display: flex; /* Flexbox layout for the card's content */
+  flex-direction: column; /* Stack content vertically */
+  margin-right: 25px;
+  border: 5px solid var(--color-secondary-accent1);
+}
+
+.card-container h2 {
+  /* deliverable title */
+  margin-top: 0;
+  color: var(--color-text-accent);
+}
+
+.card-container p {
+  /* suject info */
+  flex-grow: 1; /* Allows the paragraph to fill available space, pushing any buttons to the bottom */
+  color: var(--color-text);
+}
+
+.card-container:hover {
+  transform: scale(1.05); /* Scale up the card 5% on hover */
+  transition: transform 0.3s ease;
+  border: 5px solid var(--color-secondary-accent2);
+}
+/* #endregion Card Container */

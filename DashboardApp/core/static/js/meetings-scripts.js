@@ -3,9 +3,9 @@ var USER_ID;
 
 /* - - - MEETINGS PAGE - - - */
 // Get modal element
-var modal = document.getElementById("add-meeting-modal");
+var modal = document.getElementById("add-card-modal");
 // Get button that opens the modal
-var openModalButton = document.getElementById("add-meeting-button");
+var openModalButton = document.getElementById("add-card-button");
 // Get the <span> element that closes the modal
 var closeSpan = document.getElementsByClassName("close")[0];
 // Get the button that filters cards
@@ -67,12 +67,6 @@ window.onclick = function (event) {
   }
 };
 
-/* - - - Cards - - - */
-// on click open specific meeting
-function openMeeting(meetingCard) {
-  console.log(meetingCard);
-  console.log(meetingCard.id);
-}
 
 /* - - - MISC - - - */
 // when page loads populate the dropdown

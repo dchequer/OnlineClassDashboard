@@ -4,13 +4,13 @@ from flask_login import login_required, login_user, logout_user
 from DashboardApp import login_manager
 from .models.user import User
 
-auth_bp = Blueprint(
-    "auth", __name__, static_folder="static", template_folder="templates"
-)
+auth_bp = Blueprint("auth", __name__, static_folder="static", template_folder="templates")
+
 
 @login_manager.user_loader
 def load_user(user_id):
     return User.get_user(user_id)
+
 
 @login_manager.unauthorized_handler
 def unauthorized():
@@ -30,7 +30,7 @@ def login():
         if user := User.authenticate(username, password):
             # if the user is authenticated, redirect to the dashboard
             create_session(user)
-            login_user(user, remember=True)
+            # login_user(user, remember=True)
             return redirect(url_for("core.home"))
         else:
             # if the user is not authenticated, show an error message
@@ -73,6 +73,7 @@ def signup():
                 new_user.save()
 
                 create_session(new_user)
+                login_user(new_user, remember=True)
 
                 return redirect(url_for("core.home"))
 
