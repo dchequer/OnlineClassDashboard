@@ -8,7 +8,7 @@ WORKDIR /app
 COPY . /app
 
 # update pip 
-RUN python -m pip install --upgrade pip
+RUN pip install --upgrade pip
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
@@ -17,7 +17,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 5000
 
 # Define environment variable
-ENV NAME World
+ENV NAME DashboardFlask
 ENV PORT 5000
 ENV FLASK_APP app.py
 

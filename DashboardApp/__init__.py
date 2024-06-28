@@ -21,8 +21,14 @@ def create_app():
 
     app.secret_key = os.getenv("SECRET_KEY", "secret_key")
 
+    # attempt to read heroku database url
+    database_url: str = os.getenv("DATABASE_URL")
+    if database_url and database_url.startswith("postgres://"):
+        # replace postgres with postgresql
+        database_url = database_url.replace("postgres://", "postgresql://", 1)
+
     # init database engine
-    app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL", os.getenv("SQLALCHEMY_DATABASE_URI"))
+    app.config["SQLALCHEMY_DATABASE_URI"] = database_url or os.getenv("SQLALCHEMY_DATABASE_URI")  # if database_url is None, local database will be used
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = os.getenv("SQLALCHEMY_TRACK_MODIFICATIONS")
     db.init_app(app)
 
