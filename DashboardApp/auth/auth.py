@@ -30,7 +30,7 @@ def login():
         if user := User.authenticate(username, password):
             # if the user is authenticated, redirect to the dashboard
             create_session(user)
-            # login_user(user, remember=True)
+            login_user(user, remember=True)
             return redirect(url_for("core.home"))
         else:
             # if the user is not authenticated, show an error message
