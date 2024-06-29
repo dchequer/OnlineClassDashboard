@@ -17,7 +17,12 @@
 {% block content %}
 
 <h1 id="page-title">{{ subject.code }}</h1>
-<button id="edit-card-button">Edit</button>
+<div id="function-buttons">
+    <button id="edit-button" onclick="enterEditMode()">Edit</button>
+    <button id="cancel-button" onclick="cancelChanges()">Cancel</button>
+    <button id="save-button" onclick="saveChanges()">Save</button>
+    <button id="delete-button">Delete</button>
+</div>
 <div id="close-circle" onclick="window.location.href='/core/subjects';">
     <span class="material-symbols-outlined">cancel</span>
 </div>
@@ -26,16 +31,16 @@
 <div class="card-section">
     <h2>Subject Information</h2>
     <div class="card-section-content">
-        <p><strong>Subject Name:</strong> {{ subject.name }}</p>
-        <p><strong>Subject Code:</strong> {{ subject.code }}</p>
-        <p><strong>Subject Description:</strong> {{ subject.description }}</p>
+        <p><strong>Subject Name:</strong> <span id="subject-name" class="dynamic-content" data-original="{{ subject.name }}">{{ subject.name }}</span></p>
+        <p><strong>Subject Code:</strong> <span id="subject-code" class="dynamic-content" data-original="{{ subject.code }}">{{ subject.code }}</span></p>
+        <p><strong>Subject Description:</strong> <span id="subject-description" class="dynamic-content" data-original="{{ subject.description }}">{{ subject.description }}</span></p>
     </div>
 </div>
 <div class="card-section">
     <h2>Instructor Information</h2>
     <div class="card-section-content">
-        <p><strong>Instructor Name:</strong> {{ subject.instructor }}</p>
-        <p><strong>Instructor Contact:</strong> {{ subject.contact_info }}</p>
+        <p><strong>Instructor Name:</strong> <span id="subject-instructor" class="dynamic-content" data-original="{{ subject.instructor }}">{{ subject.instructor }}</span></p>
+        <p><strong>Instructor Contact:</strong> <span id="subject-contact" class="dynamic-content" data-original="{{ subject.contact }}">{{ subject.contact }}</span></p>
     </div>
 </div>
 <div class="card-section">

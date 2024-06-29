@@ -43,3 +43,28 @@ def get_user_meetings(user_id: int = None) -> list[Meeting]:
     json_meetings = [meeting.to_dict() for meeting in Meeting.get_all_meetings(user_id)]
 
     return json_meetings
+
+
+@api_bp.route("subject/update/<subject_name>", methods=["POST"])
+def update_subject(subject_name: str):
+    # get the subject from the database
+    user_id = session.get("user_id")
+    subject = Subject.get_subject_by_name(user_id, subject_name)
+
+    print("attempting to update subject_name: ", subject_name)
+
+    if subject is None:
+        return jsonify({"error": "Subject not found"}), 404
+
+    # update the subject with the new data
+    subject.name = request.json.get("subject-name")
+    subject.code = request.json.get("subject-code")
+    subject.description = request.json.get("subject-description")
+
+    subject.instructor = request.json.get("subject-instructor")
+    subject.contact = request.json.get("subject-contact")
+
+    # save the updated subject to the database
+    subject.save()
+
+    return jsonify(subject.to_dict())

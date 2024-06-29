@@ -14,7 +14,7 @@
 
 #close-circle:hover {
   transform: scale(1.05);
-  animation: ease .5s;
+  animation: ease 0.5s;
 }
 
 .material-symbols-outlined {
@@ -29,4 +29,51 @@
 
 .card-section h2 {
   color: var(--color3);
+}
+
+#function-buttons {
+  display: inline-block;
+}
+
+#function-buttons button {
+  background-color: var(--color-primary);
+  color: var(--color-text);
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+#function-buttons button:hover {
+  background-color: var(--color-secondary);
+}
+
+#function-buttons button:active {
+  transform: scale(0.95);
+}
+
+#cancel-button,
+#save-button {
+  display: none;
+}
+
+#edit-button.edit-mode {
+  display: none;
+}
+
+#cancel-button.edit-mode,
+#save-button.edit-mode {
+  display: inline-block;
+}
+
+.dynamic-content {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.dynamic-content.edit-mode {
+  border: 1px solid var(--color-secondary-accent2);
+  border-radius: 1vw;
+  background-color: var(--color-text-accent);
 }
