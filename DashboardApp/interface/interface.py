@@ -14,7 +14,7 @@ def subject(subject_name: str):
     user_id = session["user_id"]
     subject = Subject.get_subject_by_name(owner_id=user_id, name=subject_name)
 
-    return render_template("subject.html", subject=subject)
+    return render_template("subject.html", data_type="subject", item_name=subject.name, parent_url="/core/subjects", subject=subject)
 
 
 @interface_bp.route("/meeting/<string:meeting_name>", methods=["GET"])
@@ -24,7 +24,7 @@ def meeting(meeting_name: str):
     meeting = Meeting.get_meeting_by_name(owner_id=user_id, name=meeting_name)
     meeting.subject_name = Subject.get_subject(owner_id=user_id, id=meeting.subject_id).name
 
-    return render_template("meeting.html", meeting=meeting)
+    return render_template("meeting.html", data_type="meeting", item_name=meeting.name, parent_url="/core/meetings", meeting=meeting)
 
 
 @interface_bp.route("/deliverable/<string:deliverable_title>", methods=["GET"])
@@ -41,6 +41,4 @@ def deliverable(deliverable_title: str):
     except AttributeError:
         deliverable.meeting_name = None
 
-    print(deliverable)
-
-    return render_template("deliverable.html", deliverable=deliverable)
+    return render_template("deliverable.html", data_type="deliverable", item_name=deliverable.title, parent_url="/core/deliverables", deliverable=deliverable)

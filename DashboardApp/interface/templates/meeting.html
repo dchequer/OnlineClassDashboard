@@ -17,8 +17,13 @@
 {% block content %}
 
 <h1 id="page-title">{{ meeting.name }}</h1>
-<button id="edit-card-button">Edit</button>
-<div id="close-circle" onclick="window.location.href='/core/meetings';">
+<div id="function-buttons">
+    <button id="edit-button" onclick="enterEditMode()">Edit</button>
+    <button id="cancel-button" onclick="cancelChanges()">Cancel</button>
+    <button id="save-button" onclick="saveChanges()">Save</button>
+    <button id="delete-button">Delete</button>
+</div>
+<div id="close-circle" onclick="window.location.href='{{ parent_url }}';">
     <span class="material-symbols-outlined">cancel</span>
 </div>
 
@@ -26,16 +31,16 @@
 <div class="card-section">
     <h2>Meeting Information</h2>
     <div class="card-section-content">
-        <p><strong>Meeting Name:</strong> {{ meeting.name }}</p>
-        <p><strong>Meeting Subject:</strong> {{ meeting.subject_name }}</p>
-        <p><strong>Meeting Description:</strong> {{ meeting.description }}</p>
+        <p><strong>Meeting Name:</strong> <span id="meeting-name" class="dynamic-content" data-original="{{ meeting.name }}">{{ meeting.name }}</span></p>
+        <p><strong>Meeting Subject:</strong> <span id="meeting-subject" data-original="{{ meeting.subject_name }}">{{ meeting.subject_name }}</span></p>
+        <p><strong>Meeting Description:</strong> <span id="meeting-description" class="dynamic-content" data-original="{{ meeting.description }}">{{ meeting.description }}</span></p>
     </div>
 </div>
 <div class="card-section">
     <h2>Meeting Details</h2>
     <div class="card-section-content">
-        <p><strong>Meeting Date:</strong> {{ meeting.date.strftime("%Y-%m-%d") }}</p>
-        <p><strong>Meeting Location:</strong> {{ meeting.location }}</p>
+        <p><strong>Meeting Date:</strong> <span id="meeting-date" class="dynamic-content" data-original="{{ meeting.date.strftime('%Y-%m-%d') }}">{{ meeting.date.strftime("%Y-%m-%d") }}</span></p>
+        <p><strong>Meeting Location:</strong> <span id="meeting-location" class="dynamic-content" data-original="{{ meeting.location }}">{{ meeting.location }}</span></p>
     </div>
 </div>
 <div class="card-section">

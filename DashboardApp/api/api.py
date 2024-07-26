@@ -62,9 +62,70 @@ def update_subject(subject_name: str):
     subject.description = request.json.get("subject-description")
 
     subject.instructor = request.json.get("subject-instructor")
-    subject.contact = request.json.get("subject-contact")
+    subject.contact_info = request.json.get("subject-contact-info")
 
     # save the updated subject to the database
     subject.save()
 
     return jsonify(subject.to_dict())
+
+
+@api_bp.route("subject/delete/<subject_name>", methods=["DELETE"])
+def delete_subject(subject_name: str):
+    pass
+
+
+@api_bp.route("meeting/update/<meeting_name>", methods=["POST"])
+def update_meeting(meeting_name: str):
+    # get the meeting from the database
+    user_id = session.get("user_id")
+    meeting = Meeting.get_meeting_by_name(user_id, meeting_name)
+
+    print("attempting to update meeting_name: ", meeting_name)
+
+    if meeting is None:
+        return jsonify({"error": "Meeting not found"}), 404
+
+    # update the meeting with the new data
+    meeting.name = request.json.get("meeting-name")
+    meeting.description = request.json.get("meeting-description")
+
+    meeting.date = request.json.get("meeting-date")
+    meeting.location = request.json.get("meeting-location")
+    meeting.time = request.json.get("meeting-time")
+
+    # save the updated meeting to the database
+    meeting.save()
+
+    return jsonify(meeting.to_dict())
+
+
+@api_bp.route("meeting/delete/<meeting_name>", methods=["DELETE"])
+def delete_meeting(meeting_name: str):
+    pass
+
+
+@api_bp.route("deliverable/update/<deliverable_title>", methods=["POST"])
+def update_deliverable(deliverable_title: str):
+    # get the deliverable from the database
+    user_id = session.get("user_id")
+    deliverable = Deliverable.get_deliverable_by_title(user_id, deliverable_title)
+
+    print("attempting to update deliverable_title: ", deliverable_title)
+
+    if deliverable is None:
+        return jsonify({"error": "Deliverable not found"}), 404
+
+    # update the deliverable with the new data
+    deliverable.title = request.json.get("deliverable-title")
+    deliverable.description = request.json.get("deliverable-description")
+
+    deliverable.assigned_date = request.json.get("deliverable-assigned-date")
+    deliverable.due_date = request.json.get("deliverable-due-date")
+    deliverable.status = request.json.get("deliverable-status")
+    deliverable.grade = request.json.get("deliverable-grade")
+
+    # save the updated deliverable to the database
+    deliverable.save()
+
+    return jsonify(deliverable.to_dict())

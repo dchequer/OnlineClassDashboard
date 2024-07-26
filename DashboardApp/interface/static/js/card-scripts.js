@@ -1,4 +1,7 @@
 let isEditing = false;
+const dataType = document.getElementById("data-type").innerText;
+const itemName = document.getElementById("item-name").innerText;
+const parentURL = document.getElementById("parent-url").innerText;
 
 // event listener for 'esc' to trigger the close circle
 document.addEventListener("keyup", (event) => {
@@ -23,6 +26,7 @@ function restrictInput(event) {
     console.log("Valid input");
   }
 }
+
 
 function enterEditMode() {
   console.log("enter edit mode");
@@ -83,17 +87,12 @@ function saveChanges() {
     var value = tag.innerText;
     newValues[key] = value;
   }
-  // send newValues to the server
   console.log(newValues);
+
   // Determine the dynamic URL based on the user's context
-  const pathArray = window.location.pathname.split("/");
-  const dataType = pathArray[2];  // interface/[dataType]/name
-  const name = pathArray[3];      // interface/dataType/[name]
-
-  const url = `/api/${dataType}/update/${name}`;
-
+  const url = `/api/${dataType}/update/${itemName}`;
   console.log(url);
-
+  // send the new values to the server
   fetch(url, {
     method: "POST",
     headers: {
@@ -109,4 +108,6 @@ function saveChanges() {
       console.error("Error:", error);
     });
 
+  // reload the page
+  location.reload();
 }

@@ -23,7 +23,7 @@
     <button id="save-button" onclick="saveChanges()">Save</button>
     <button id="delete-button">Delete</button>
 </div>
-<div id="close-circle" onclick="window.location.href='/core/subjects';">
+<div id="close-circle" onclick="window.location.href='{{ parent_url }}';">
     <span class="material-symbols-outlined">cancel</span>
 </div>
 
@@ -40,7 +40,7 @@
     <h2>Instructor Information</h2>
     <div class="card-section-content">
         <p><strong>Instructor Name:</strong> <span id="subject-instructor" class="dynamic-content" data-original="{{ subject.instructor }}">{{ subject.instructor }}</span></p>
-        <p><strong>Instructor Contact:</strong> <span id="subject-contact" class="dynamic-content" data-original="{{ subject.contact }}">{{ subject.contact }}</span></p>
+        <p><strong>Instructor Contact Info:</strong> <span id="subject-contact-info" class="dynamic-content" data-original="{{ subject.contact_info }}">{{ subject.contact_info }}</span></p>
     </div>
 </div>
 <div class="card-section">

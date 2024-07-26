@@ -17,8 +17,13 @@
 {% block content %}
 
 <h1 id="page-title">{{ deliverable.title }}</h1>
-<button id="edit-card-button">Edit</button>
-<div id="close-circle" onclick="window.location.href='/core/deliverables';">
+<div id="function-buttons">
+    <button id="edit-button" onclick="enterEditMode()">Edit</button>
+    <button id="cancel-button" onclick="cancelChanges()">Cancel</button>
+    <button id="save-button" onclick="saveChanges()">Save</button>
+    <button id="delete-button">Delete</button>
+</div>
+<div id="close-circle" onclick="window.location.href='{{ parent_url }}';">
     <span class="material-symbols-outlined">cancel</span>
 </div>
 
@@ -26,19 +31,19 @@
 <div class="card-section">
     <h2>Deliverable Information</h2>
     <div class="card-section-content">
-        <p><strong>Deliverable Title:</strong> {{ deliverable.title }}</p>
-        <p><strong>Deliverable Subject:</strong> {{ deliverable.subject_name }}</p>
-        <p><strong>Deliverable Meeting:</strong> {{ deliverable.meeting_name }}</p>
-        <p><strong>Deliverable Description:</strong> {{ deliverable.description }}</p>
+        <p><strong>Deliverable Title:</strong> <span id="deliverable-title" class="dynamic-content" data-original="{{ deliverable.title }}">{{ deliverable.title }}</span></p>
+        <p><strong>Deliverable Subject:</strong> <span id="deliverable-subject" data-original="{{ deliverable.subject_name }}">{{ deliverable.subject_name }}</span></p>
+        <p><strong>Deliverable Meeting:</strong> <span id="deliverable-meeting" data-original="{{ deliverable.meeting_name }}">{{ deliverable.meeting_name }}</span></p>
+        <p><strong>Deliverable Description:</strong> <span id="deliverable-description" class="dynamic-content" data-original="{{ deliverable.description }}">{{ deliverable.description }}</span></p>
     </div>
 </div>
 <div class="card-section">
     <h2>Deliverable Details</h2>
     <div class="card-section-content">
-        <p><strong>Deliverable Assigned Date:</strong> {{ deliverable.assigned_date.strftime("%Y-%m-%d") }}</p>
-        <p><strong>Deliverable Due Date:</strong> {{ deliverable.due_date.strftime("%Y-%m-%d") }}</p>
-        <p><strong>Deliverable Status:</strong> {{ deliverable.status }}</p>
-        <p><strong>Deliverable Grade:</strong> {{ deliverable.grade }}</p>
+        <p><strong>Deliverable Assigned Date:</strong> <span id="deliverable-assigned-date" class="dynamic-content" data-original="{{ deliverable.assigned_date.strftime('%Y-%m-%d') }}">{{ deliverable.assigned_date.strftime("%Y-%m-%d") }}</span></p>
+        <p><strong>Deliverable Due Date:</strong> <span id="deliverable-due-date" class="dynamic-content" data-original="{{ deliverable.due_date.strftime('%Y-%m-%d') }}">{{ deliverable.due_date.strftime("%Y-%m-%d") }}</span></p>
+        <p><strong>Deliverable Status:</strong> <span id="deliverable-status" class="dynamic-content" data-original="{{ deliverable.status }}">{{ deliverable.status }}</span></p>
+        <p><strong>Deliverable Grade:</strong> <span id="deliverable-grade" class="dynamic-content" data-original="{{ deliverable.grade }}">{{ deliverable.grade }}</span></p>
     </div>
 </div>
 <div class="card-section">
