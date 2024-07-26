@@ -28,8 +28,12 @@ def create_app():
         database_url = database_url.replace("postgres://", "postgresql://", 1)
 
     # init database engine
-    app.config["SQLALCHEMY_DATABASE_URI"] = database_url or os.getenv("SQLALCHEMY_DATABASE_URI")  # if database_url is None, local database will be used
-    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = os.getenv("SQLALCHEMY_TRACK_MODIFICATIONS")
+    app.config["SQLALCHEMY_DATABASE_URI"] = database_url or os.getenv(
+        "SQLALCHEMY_DATABASE_URI"
+    )  # if database_url is None, local database will be used
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = os.getenv(
+        "SQLALCHEMY_TRACK_MODIFICATIONS"
+    )
     db.init_app(app)
 
     # init migration engine

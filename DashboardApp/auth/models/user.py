@@ -40,19 +40,19 @@ class User(db.Model):
     def get(self, args: str) -> list:
         return [getattr(self, arg.strip()) for arg in args.split(",")]
 
-
     # - - - Flask Login methods - - - #
     def is_authenticated(self):
         return True
-    
+
     def is_anonymous(self):
         return False
-    
+
     def is_active(self):
         return True
-    
+
     def get_id(self):
         return str(self.id)
+
     # - - - - - - - - - - - - - - - - #
 
     @staticmethod

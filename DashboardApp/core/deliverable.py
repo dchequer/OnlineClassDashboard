@@ -6,7 +6,9 @@ from datetime import date
 from typing import List
 
 
-deliverable_bp = Blueprint("deliverable", __name__, static_folder="static", template_folder="templates")
+deliverable_bp = Blueprint(
+    "deliverable", __name__, static_folder="static", template_folder="templates"
+)
 
 
 def get_deliverables():
@@ -35,7 +37,9 @@ def deliverables():
         subject_id = request.form["subject"] if request.form["subject"] != "0" else None
         meeting_id = request.form["meeting"] if request.form["meeting"] != "0" else None
 
-        print(f"Received new deliverable request: {owner_id=}, {title=}, {assigned_date=}, {due_date=}, {subject_id=}, {meeting_id=}, {description=}")
+        print(
+            f"Received new deliverable request: {owner_id=}, {title=}, {assigned_date=}, {due_date=}, {subject_id=}, {meeting_id=}, {description=}"
+        )
         print("Checking if deliverable already exists...")
         if not Deliverable.deliverable_exists(owner_id, title):
             print("Deliverable does not exist. Creating new deliverable...")
@@ -53,10 +57,14 @@ def deliverables():
             print("Deliverable already exists")
             errors.append("Deliverable already exists")
 
-    return render_template("deliverables.html", deliverables=get_deliverables(), errors=errors)
+    return render_template(
+        "deliverables.html", deliverables=get_deliverables(), errors=errors
+    )
 
 
 @deliverable_bp.route("/deliverables/<string:deliverable_title>", methods=["GET"])
 @login_required
 def deliverable(deliverable_title: str):
-    return redirect(url_for("interface.deliverable", deliverable_title=deliverable_title))
+    return redirect(
+        url_for("interface.deliverable", deliverable_title=deliverable_title)
+    )

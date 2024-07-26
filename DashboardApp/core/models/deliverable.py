@@ -60,11 +60,18 @@ class Deliverable(db.Model):
 
     @staticmethod
     def deliverable_exists(owner_id: int, title: str) -> bool:
-        return Deliverable.limit_query_to_owner(owner_id).filter_by(title=title).first() is not None
+        return (
+            Deliverable.limit_query_to_owner(owner_id).filter_by(title=title).first()
+            is not None
+        )
 
     @staticmethod
     def get_deliverable(owner_id: int, deliverable_id: int) -> Deliverable:
-        return Deliverable.limit_query_to_owner(owner_id).filter_by(id=deliverable_id).first()
+        return (
+            Deliverable.limit_query_to_owner(owner_id)
+            .filter_by(id=deliverable_id)
+            .first()
+        )
 
     @staticmethod
     def get_deliverable_by_title(owner_id: int, title: str) -> Deliverable:
@@ -75,17 +82,37 @@ class Deliverable(db.Model):
         return Deliverable.limit_query_to_owner(owner_id).all()
 
     @staticmethod
-    def get_deliverables_by_subject(owner_id: int, subject_id: int) -> list[Deliverable]:
-        return Deliverable.limit_query_to_owner(owner_id).filter_by(subject_id=subject_id).all()
+    def get_deliverables_by_subject(
+        owner_id: int, subject_id: int
+    ) -> list[Deliverable]:
+        return (
+            Deliverable.limit_query_to_owner(owner_id)
+            .filter_by(subject_id=subject_id)
+            .all()
+        )
 
     @staticmethod
-    def get_deliverables_by_meeting(owner_id: int, meeting_id: int) -> list[Deliverable]:
-        return Deliverable.limit_query_to_owner(owner_id).filter_by(meeting_id=meeting_id).all()
+    def get_deliverables_by_meeting(
+        owner_id: int, meeting_id: int
+    ) -> list[Deliverable]:
+        return (
+            Deliverable.limit_query_to_owner(owner_id)
+            .filter_by(meeting_id=meeting_id)
+            .all()
+        )
 
     @staticmethod
     def search_deliverables(owner_id: int, search_term: str) -> list[Deliverable]:
-        return Deliverable.limit_query_to_owner(owner_id).filter_by(Deliverable.title.ilike(f"%{search_term}%")).all()
+        return (
+            Deliverable.limit_query_to_owner(owner_id)
+            .filter_by(Deliverable.title.ilike(f"%{search_term}%"))
+            .all()
+        )
 
     @staticmethod
     def get_deliverables_by_status(owner_id: int, status: str) -> list[Deliverable]:
-        return Deliverable.limit_query_to_owner(owner_id=owner_id).filter_by(status=status).all()
+        return (
+            Deliverable.limit_query_to_owner(owner_id=owner_id)
+            .filter_by(status=status)
+            .all()
+        )

@@ -25,7 +25,15 @@ class Subject(db.Model):
     deliverables = db.relationship("Deliverable", backref="subject", lazy=True)
     meetings = db.relationship("Meeting", backref="subject", lazy=True)
 
-    def __init__(self, owner_id: int, name: str, code: str, instructor: str, contact_info: str, description: str = None):
+    def __init__(
+        self,
+        owner_id: int,
+        name: str,
+        code: str,
+        instructor: str,
+        contact_info: str,
+        description: str = None,
+    ):
         self.owner_id = owner_id
         self.name = name
         self.code = code
@@ -69,7 +77,10 @@ class Subject(db.Model):
 
     @staticmethod
     def subject_exists(owner_id: int, name: str) -> bool:
-        return Subject.limit_query_to_owner(owner_id).filter_by(name=name).first() is not None
+        return (
+            Subject.limit_query_to_owner(owner_id).filter_by(name=name).first()
+            is not None
+        )
 
     @staticmethod
     def get_subject_by_name(owner_id: int, name: str) -> Subject:

@@ -4,7 +4,9 @@ from .models.subject import Subject
 from typing import List
 
 
-subject_bp = Blueprint("subject", __name__, static_folder="static", template_folder="templates")
+subject_bp = Blueprint(
+    "subject", __name__, static_folder="static", template_folder="templates"
+)
 
 
 def get_subjects():
@@ -26,11 +28,20 @@ def subjects():
         contact_info = request.form["contact-info"]
         description = request.form["description"]
 
-        print(f"Received new subject request: {owner_id=}, {subject_name=}, {subject_code=}, {instructor=}, {contact_info=}, {description=}")
+        print(
+            f"Received new subject request: {owner_id=}, {subject_name=}, {subject_code=}, {instructor=}, {contact_info=}, {description=}"
+        )
         print("Checking if subject already exists...")
         if not Subject.subject_exists(owner_id, subject_name):
             print("Subject does not exist. Creating new subject...")
-            subject = Subject(owner_id, subject_name, subject_code, instructor, contact_info, description)
+            subject = Subject(
+                owner_id,
+                subject_name,
+                subject_code,
+                instructor,
+                contact_info,
+                description,
+            )
             subject.save()
         else:
             print("Subject already exists")

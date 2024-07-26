@@ -21,27 +21,29 @@ class Announcement(db.Model):
         self.content = content
         self.author = author
         self.subject_id = subject_id
-    
+
     def save(self):
         db.session.add(self)
         db.session.commit()
-    
-    def delete(self):     
+
+    def delete(self):
         db.session.delete(self)
         db.session.commit()
-    
+
     @staticmethod
     def get_announcement(announcement_id: int) -> Announcement:
         return Announcement.query.filter_by(id=announcement_id).first()
-    
+
     @staticmethod
     def get_all_announcements() -> list[Announcement]:
         return Announcement.query.all()
-    
+
     @staticmethod
     def get_announcements_by_subject(subject_id: int) -> list[Announcement]:
         return Announcement.query.filter_by(subject_id=subject_id).all()
-    
+
     @staticmethod
     def search_announcements(search_term: str) -> list[Announcement]:
-        return Announcement.query.filter(Announcement.title.ilike(f"%{search_term}%")).all()
+        return Announcement.query.filter(
+            Announcement.title.ilike(f"%{search_term}%")
+        ).all()

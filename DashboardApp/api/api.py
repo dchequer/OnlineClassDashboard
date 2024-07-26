@@ -1,5 +1,14 @@
 # DashboardApp/api/api.py
-from flask import Blueprint, redirect, render_template, request, url_for, session, flash, jsonify
+from flask import (
+    Blueprint,
+    redirect,
+    render_template,
+    request,
+    url_for,
+    session,
+    flash,
+    jsonify,
+)
 from ..core.models.subject import Subject
 from ..core.models.deliverable import Deliverable
 from ..core.models.meeting import Meeting
@@ -29,7 +38,10 @@ def get_user_deliverables(user_id: int = None) -> list[Deliverable]:
         user_id = session.get("user_id")
 
     # get the deliverables for the user
-    json_deliverables = [deliverable.to_dict() for deliverable in Deliverable.get_all_deliverables(user_id)]
+    json_deliverables = [
+        deliverable.to_dict()
+        for deliverable in Deliverable.get_all_deliverables(user_id)
+    ]
 
     return json_deliverables
 

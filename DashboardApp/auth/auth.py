@@ -1,10 +1,20 @@
 # DashboardApp/auth/auth.py
-from flask import Blueprint, redirect, render_template, request, url_for, session, current_app
+from flask import (
+    Blueprint,
+    redirect,
+    render_template,
+    request,
+    url_for,
+    session,
+    current_app,
+)
 from flask_login import login_required, login_user, logout_user
 from DashboardApp import login_manager
 from .models.user import User
 
-auth_bp = Blueprint("auth", __name__, static_folder="static", template_folder="templates")
+auth_bp = Blueprint(
+    "auth", __name__, static_folder="static", template_folder="templates"
+)
 
 
 @login_manager.user_loader

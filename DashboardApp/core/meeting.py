@@ -5,7 +5,9 @@ from .models.meeting import Meeting
 from datetime import date
 from typing import List
 
-meeting_bp = Blueprint("meeting", __name__, static_folder="static", template_folder="templates")
+meeting_bp = Blueprint(
+    "meeting", __name__, static_folder="static", template_folder="templates"
+)
 
 
 def get_meetings():
@@ -34,7 +36,9 @@ def meetings():
 
         subject_id = request.form["subject"] if request.form["subject"] != "0" else None
 
-        print(f"Received new meeting request: {owner_id=}, {name=}, {date=}, {subject_id=}, {description=}")
+        print(
+            f"Received new meeting request: {owner_id=}, {name=}, {date=}, {subject_id=}, {description=}"
+        )
         print("Checking if meeting already exists...")
         if not Meeting.meeting_exists(owner_id, name):
             print("Meeting does not exist. Creating new meeting...")
